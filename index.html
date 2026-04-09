@@ -11,96 +11,111 @@
 body{background:#07101f;color:#e2e8f0;font-family:'Noto Sans KR',sans-serif;min-height:100vh}
 .app{max-width:520px;margin:0 auto;padding-bottom:80px}
 .hdr{background:linear-gradient(160deg,#0d2040,#07101f);padding:18px 16px 14px;border-bottom:1px solid #1a2f50}
-.hdr-top{display:flex;justify-content:space-between;align-items:flex-start}
+.hdr-row{display:flex;justify-content:space-between;align-items:flex-start}
 .hdr-title{font-size:20px;font-weight:800;color:#fbbf24}
 .hdr-sub{font-size:11px;color:#4a6280;margin-top:2px}
-.hdr-count-n{font-size:20px;font-weight:800;color:#34d399}
-.hdr-count-l{font-size:10px;color:#4a6280;text-align:right}
-.badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center}
+.badges{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
 .badge{font-size:10px;padding:2px 9px;border-radius:20px}
 .tabs{display:flex;background:#07101f;border-bottom:1px solid #1a2f50;position:sticky;top:0;z-index:10}
 .tab{flex:1;padding:10px 2px;font-size:11px;font-weight:400;color:#4a6280;background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;font-family:'Noto Sans KR',sans-serif}
-.tab.active{font-weight:700;color:#fbbf24;border-bottom-color:#fbbf24}
+.tab.on{font-weight:700;color:#fbbf24;border-bottom-color:#fbbf24}
 .sec{padding:14px}
 .card{background:#0d1b2e;border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #1a2f50}
 .lbl{font-size:12px;font-weight:700;color:#4a6280;margin-bottom:8px}
-.drop-zone{border:2px dashed #1a2f50;border-radius:12px;padding:20px 16px;text-align:center;margin-bottom:12px;background:#07101f;transition:all .2s}
-.drop-zone.drag{border-color:#fbbf24;background:#1a2f1a}
-.file-btn{display:inline-block;padding:9px 20px;border-radius:8px;background:#1a3050;color:#60a5fa;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #1a2f50;font-family:'Noto Sans KR',sans-serif}
-.del-all-btn{width:100%;padding:9px;border-radius:8px;font-size:12px;font-weight:700;background:#ef4444;color:#fff;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;margin-top:4px;margin-bottom:12px}
-.del-btn{font-size:10px;padding:2px 8px;border-radius:6px;background:#3f0f0f;color:#fca5a5;border:1px solid #7f1d1d;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
-.msg{font-size:11px;margin-top:8px;line-height:1.7;padding:6px 8px;border-radius:6px;background:#07101f;white-space:pre-line}
-.err-box{font-size:12px;color:#f87171;margin-bottom:12px;padding:10px 12px;background:#1a0f0f;border-radius:8px;border:1px solid #7f1d1d}
-.tip-box{font-size:11px;color:#4a6280;line-height:1.9;background:#0d1b2e;border-radius:8px;padding:12px}
-.filter-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 .fbtn{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid;font-family:'Noto Sans KR',sans-serif}
-.search-inp{width:100%;background:#07101f;border:1px solid #1a2f50;border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none}
-.mat-list{max-height:240px;overflow-y:auto;border:1px solid #1a2f50;border-radius:8px;margin-top:8px}
-.mat-item{padding:10px 12px;font-size:12px;cursor:pointer;line-height:1.4;border-bottom:1px solid #1a2f50;color:#e2e8f0}
-.mat-item:hover,.mat-item.sel{background:#162444;color:#93c5fd}
-.grade-hdr{padding:5px 12px;font-size:10px;font-weight:700;background:#07101f;border-bottom:1px solid #1a2f50;letter-spacing:1px}
+.vbtn{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:'Noto Sans KR',sans-serif}
+.dz{border:2px dashed #1a2f50;border-radius:12px;padding:20px 16px;text-align:center;margin-bottom:12px;background:#07101f;transition:all .2s}
+.dz.drag{border-color:#fbbf24;background:#1a2f1a}
+.fbtn2{display:inline-block;padding:9px 20px;border-radius:8px;background:#1a3050;color:#60a5fa;font-size:12px;font-weight:700;cursor:pointer;border:1px solid #1a2f50;font-family:'Noto Sans KR',sans-serif}
+.msg{font-size:11px;margin-top:8px;line-height:1.7;padding:6px 8px;border-radius:6px;background:#07101f;white-space:pre-line}
+.err{font-size:12px;color:#f87171;margin-bottom:12px;padding:10px 12px;background:#1a0f0f;border-radius:8px;border:1px solid #7f1d1d}
+.tip{font-size:11px;color:#4a6280;line-height:1.9;background:#0d1b2e;border-radius:8px;padding:12px}
+.delall{width:100%;padding:9px;border-radius:8px;font-size:12px;font-weight:700;background:#ef4444;color:#fff;border:none;cursor:pointer;font-family:'Noto Sans KR',sans-serif;margin:4px 0 12px}
+.delbtn{font-size:10px;padding:2px 8px;border-radius:6px;background:#3f0f0f;color:#fca5a5;border:1px solid #7f1d1d;cursor:pointer;font-family:'Noto Sans KR',sans-serif}
+/* 차트 - 자재 패널 */
+.mat-panel{background:#0d1b2e;border-radius:12px;border:1px solid #1a2f50;margin-bottom:12px;overflow:hidden}
+.mat-panel-top{padding:14px 14px 0}
+.search-wrap{padding:0 14px 8px}
+.si{width:100%;background:#07101f;border:1px solid #1a2f50;border-radius:8px;padding:9px 12px;color:#e2e8f0;font-size:13px;font-family:'Noto Sans KR',sans-serif;outline:none}
+.mat-list{max-height:200px;overflow-y:auto;border-top:1px solid #1a2f50}
+.mat-item{padding:10px 14px;font-size:12px;cursor:pointer;line-height:1.4;border-bottom:1px solid #1a2f5055;color:#e2e8f0}
+.mat-item:hover{background:#162444}
+.mat-item.on{background:#162444;color:#93c5fd}
+.grade-hdr{padding:5px 14px;font-size:10px;font-weight:700;background:#07101f;border-bottom:1px solid #1a2f50;letter-spacing:1px}
+/* 통계 */
 .stat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
-.stat-card{background:#07101f;border-radius:10px;padding:10px 6px;text-align:center}
-.stat-val{font-size:22px;font-weight:800}
-.stat-lbl{font-size:10px;color:#4a6280;margin-top:2px}
+.sc{background:#07101f;border-radius:10px;padding:10px 6px;text-align:center}
+.sv{font-size:22px;font-weight:800}
+.sl{font-size:10px;color:#4a6280;margin-top:2px}
 .bar-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .bar-name{font-size:11px;width:90px;flex-shrink:0}
 .bar-track{flex:1;height:8px;background:#07101f;border-radius:4px;overflow:hidden}
 .bar-fill{height:8px;border-radius:4px}
 .bar-val{font-size:12px;font-weight:700;min-width:40px;text-align:right}
-.vbtn{padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;font-family:'Noto Sans KR',sans-serif}
+.chart-scroll{overflow-x:auto}
+/* 토탈 */
+.tsup-hdr{font-size:14px;font-weight:800;padding:10px 0 8px;border-bottom:1px solid #1a2f50;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.trow{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;margin-bottom:6px;background:#07101f}
+.tmat{font-size:12px;color:#cbd5e1;flex:1;word-break:break-all;padding-right:8px}
+.tqty{font-size:14px;font-weight:800;min-width:55px;text-align:right;flex-shrink:0}
+.tghdr{font-size:11px;font-weight:700;color:#4a6280;padding:6px 10px 4px;letter-spacing:1px}
+.grand{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#162444;border-radius:10px;margin-top:8px;border:1px solid #1a2f50}
 .empty{text-align:center;padding:28px;color:#4a6280;font-size:13px;line-height:1.8}
-.chart-scroll{overflow-x:auto;padding-bottom:4px}
+.frow{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
 table{width:100%;border-collapse:collapse;font-size:11px}
 th{background:#07101f;color:#4a6280;padding:7px 6px;text-align:left;border-bottom:1px solid #1a2f50}
 td{padding:7px 6px;border-bottom:1px solid #1a2f5033;color:#cbd5e1}
-.total-sup-hdr{font-size:14px;font-weight:800;padding:10px 0 8px;border-bottom:1px solid #1a2f50;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.total-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;border-radius:8px;margin-bottom:6px;background:#07101f}
-.total-mat{font-size:12px;color:#cbd5e1;flex:1;word-break:break-all;padding-right:8px}
-.total-qty{font-size:14px;font-weight:800;min-width:55px;text-align:right;flex-shrink:0}
-.total-grade-hdr{font-size:11px;font-weight:700;color:#4a6280;padding:6px 10px 4px;letter-spacing:1px}
-.grand-total{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#162444;border-radius:10px;margin-top:8px;border:1px solid #1a2f50}
 </style>
 </head>
 <body>
 <div class="app">
   <div class="hdr">
-    <div class="hdr-top">
-      <div><div class="hdr-title">🥚 자연 발주 통계</div><div class="hdr-sub">CJ프레시웨이 · 동원 · 푸디스트</div></div>
-      <div><div class="hdr-count-n" id="totalRows">0</div><div class="hdr-count-l">총 누적 건</div></div>
+    <div class="hdr-row">
+      <div><div class="hdr-title">🥚 자연 발주 통계</div><div class="hdr-sub">CJ · 동원 · 푸디스트</div></div>
+      <div style="text-align:right"><div style="font-size:20px;font-weight:800;color:#34d399" id="hTot">0</div><div style="font-size:10px;color:#4a6280">총 누적 건</div></div>
     </div>
-    <div class="badges" id="badges"></div>
+    <div class="badges" id="hBadges"></div>
   </div>
+
   <div class="tabs" id="tabBar">
-    <button class="tab active" data-tab="upload">📁 데이터</button>
+    <button class="tab on" data-tab="upload">📁 데이터</button>
     <button class="tab" data-tab="chart">📊 차트</button>
     <button class="tab" data-tab="total">📦 토탈</button>
     <button class="tab" data-tab="table">📋 내역</button>
   </div>
 
   <div id="tab-upload" class="sec">
-    <div class="drop-zone" id="dropZone">
+    <div class="dz" id="dz">
       <div style="font-size:28px;margin-bottom:6px">📂</div>
       <div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:4px">파일을 여기에 드래그하거나</div>
       <div style="font-size:11px;color:#4a6280;margin-bottom:12px;line-height:1.8">
         파일명에 <b style="color:#f59e0b">CJ</b> · <b style="color:#10b981">동원</b> · <b style="color:#3b82f6">푸디스트</b> 포함 시 즉시 인식<br>
-        파일명 수정 안 해도 컬럼으로 자동 감지<br>
-        올리면 <b style="color:#34d399">☁️ 클라우드 저장</b> → 폰에서 바로 조회
+        업로드하면 <b style="color:#34d399">☁️ 클라우드 저장</b> → 폰에서 바로 조회
       </div>
-      <label class="file-btn">📂 파일 선택 (여러 개 가능)
-        <input type="file" id="fileInput" accept=".xlsx,.xls" multiple style="display:none"/>
+      <label class="fbtn2">📂 파일 선택 (여러 개 가능)
+        <input type="file" id="fileIn" accept=".xlsx,.xls" multiple style="display:none"/>
       </label>
     </div>
     <div id="errMsg"></div>
     <div id="supCards"></div>
-    <button class="del-all-btn" id="btnResetAll">🗑 전체삭제 (클라우드 포함)</button>
-    <div class="tip-box">
-      📱 <b style="color:#34d399">핸드폰에서 보는 법</b><br>
-      이 페이지 주소 복사 → 카카오톡으로 나에게 보내기 → 링크 열기 ✨<br>
-      <span style="color:#2a4060">컴퓨터에서 올린 데이터가 폰에서 자동으로 보여요</span>
+    <button class="delall" id="btnDelAll">🗑 전체삭제 (클라우드 포함)</button>
+    <div class="tip">📱 <b style="color:#34d399">핸드폰에서 보는 법</b><br>이 페이지 주소 복사 → 카카오톡으로 나에게 보내기 → 링크 열기 ✨</div>
+  </div>
+
+  <div id="tab-chart" class="sec" style="display:none">
+    <div id="chartFilters"></div>
+    <div class="mat-panel">
+      <div class="mat-panel-top"><div class="lbl" id="matLbl">🔍 자재 선택</div></div>
+      <div class="search-wrap"><input class="si" id="searchInp" placeholder="자재명 검색..."/></div>
+      <div class="mat-list" id="matList"></div>
+    </div>
+    <div id="statsPanel" style="display:none">
+      <div class="stat-grid" id="statGrid"></div>
+      <div class="card" id="supBars" style="display:none"></div>
+      <div class="card" id="chartCard"></div>
     </div>
   </div>
-  <div id="tab-chart" class="sec" style="display:none"><div id="chartContent"></div></div>
+
   <div id="tab-total" class="sec" style="display:none"><div id="totalContent"></div></div>
   <div id="tab-table" class="sec" style="display:none"><div id="tableContent"></div></div>
 </div>
@@ -114,650 +129,462 @@ const db = getDatabase(initializeApp({
   databaseURL:"https://program-953e1-default-rtdb.firebaseio.com",
   projectId:"program-953e1",
 }));
-const DB = "egg_v3"; // 새 경로로 깨끗하게 시작
+const DB="egg_v4";
 
-// ── 납품처 규칙 ──────────────────────────────────────────────────
-const RULES = [
-  {
-    name:"CJ프레시웨이", color:"#f59e0b", kw:["cj","씨제이"],
-    match: c => c.includes("납품일자") && c.includes("발주수량") && c.includes("발주번호"),
-    parse(rows) {
-      const res = [];
-      for(const r of rows) {
-        const date = toDate(r["납품일자"]); if(!date) continue;
-        const mat = str(r["상품명"]); if(!mat) continue;
-        const qty = num(r["발주수량"]); if(qty <= 0) continue;
-        const uid = `CJ_${str(r["발주번호"])}_${str(r["항번"])}`;
-        res.push({date, material:mat, qty, _key:safeKey(uid)});
-      }
-      return res;
-    }
+const RULES=[
+  { name:"CJ프레시웨이",    color:"#f59e0b", kw:["cj","씨제이"],
+    detect:c=>c.includes("납품일자")&&c.includes("발주수량")&&c.includes("발주번호"),
+    parse(rows){ return rows.flatMap(r=>{
+      const date=toDate(r["납품일자"]);if(!date)return[];
+      const mat=sv(r["상품명"]);if(!mat)return[];
+      const qty=nv(r["발주수량"]);if(qty<=0)return[];
+      return[{date,material:mat,qty,_key:sk(`CJ_${sv(r["발주번호"])}_${sv(r["항번"])}`)}];
+    });}
   },
-  {
-    name:"동원(시화+화성)", color:"#10b981", kw:["동원"],
-    match: c => c.includes("배송일자") && c.includes("최종주문량") && c.includes("의뢰번호"),
-    parse(rows) {
-      const res = [];
-      for(const r of rows) {
-        const date = toDate(r["배송일자"]); if(!date) continue;
-        const mat = str(r["상품명"]); if(!mat) continue;
-        let qty = num(r["최종주문량"]);
-        if(qty === 0) qty = num(r["원주문량"]);
-        if(qty <= 0) continue;
-        // ★ 붙은 품목은 원본 수량 그대로 저장 (토탈 탭에서 *5 처리)
-        const uid = `DW_${str(r["의뢰번호"])}_${str(r["순번"])}`;
-        res.push({date, material:mat, qty, _key:safeKey(uid)});
-      }
-      return res;
-    }
+  { name:"동원(시화+화성)", color:"#10b981", kw:["동원"],
+    detect:c=>c.includes("배송일자")&&c.includes("최종주문량")&&c.includes("의뢰번호"),
+    parse(rows){ return rows.flatMap(r=>{
+      const date=toDate(r["배송일자"]);if(!date)return[];
+      const mat=sv(r["상품명"]);if(!mat)return[];
+      let qty=nv(r["최종주문량"]);if(qty===0)qty=nv(r["원주문량"]);
+      if(qty<=0)return[];
+      // ★ 원본 수량 저장 (토탈에서만 *5)
+      return[{date,material:mat,qty,_key:sk(`DW_${sv(r["의뢰번호"])}_${sv(r["순번"])}`)}];
+    });}
   },
-  {
-    name:"푸디스트", color:"#3b82f6", kw:["푸디스트","foodist"],
-    match: c => c.includes("자재명") && c.includes("입고일") && c.includes("현재수량"),
-    parse(rows) {
-      const res = [];
-      for(const r of rows) {
-        // 취소시간: 실제 시간값(숫자포함 2자이상)이면 취소 → 제외
-        const cc = str(r["취소시간"]).trim();
-        if(cc.length >= 2 && cc !== "0") continue;
-        const date = toDate(r["입고일"]); if(!date) continue;
-        const mat = str(r["자재명"]); if(!mat) continue;
-        const qty = num(r["현재수량"]); if(qty <= 0) continue;
-        const uid = `FD_${str(r["발주번호"])}`;
-        res.push({date, material:mat, qty, _key:safeKey(uid)});
-      }
-      return res;
-    }
+  { name:"푸디스트",        color:"#3b82f6", kw:["푸디스트","foodist"],
+    detect:c=>c.includes("자재명")&&c.includes("입고일")&&c.includes("현재수량"),
+    parse(rows){ return rows.flatMap(r=>{
+      const cc=sv(r["취소시간"]);if(cc.length>=2&&cc!=="0")return[];
+      const date=toDate(r["입고일"]);if(!date)return[];
+      const mat=sv(r["자재명"]);if(!mat)return[];
+      const qty=nv(r["현재수량"]);if(qty<=0)return[];
+      return[{date,material:mat,qty,_key:sk(`FD_${sv(r["발주번호"])}`)}];
+    });}
   },
 ];
 
-// ── 유틸 ─────────────────────────────────────────────────────────
-const str = v => String(v ?? "").trim();
-const num = v => parseFloat(str(v).replace(/[^0-9.]/g,"")) || 0;
-const safeKey = s => s.replace(/[.#$\[\]/\s]/g,"_");
-const p2 = n => String(n).padStart(2,"0");
+const sv=v=>String(v??'').trim();
+const nv=v=>parseFloat(sv(v).replace(/[^0-9.]/g,''))||0;
+const sk=v=>v.replace(/[.#$\[\]/\s]/g,'_');
+const p2=v=>String(v).padStart(2,'0');
 
-function toDate(raw) {
-  if(!raw && raw !== 0) return null;
-  if(raw instanceof Date) return `${raw.getFullYear()}-${p2(raw.getMonth()+1)}-${p2(raw.getDate())}`;
-  const s = str(raw);
-  const m0 = s.match(/^(\d{4})(\d{2})(\d{2})$/); if(m0) return `${m0[1]}-${m0[2]}-${m0[3]}`;
-  const m1 = s.match(/(\d{4})[\-\/\.\s](\d{1,2})[\-\/\.\s](\d{1,2})/);
-  if(m1) return `${m1[1]}-${p2(m1[2])}-${p2(m1[3])}`;
+function toDate(raw){
+  if(!raw&&raw!==0)return null;
+  if(raw instanceof Date)return`${raw.getFullYear()}-${p2(raw.getMonth()+1)}-${p2(raw.getDate())}`;
+  const t=sv(raw);
+  const m0=t.match(/^(\d{4})(\d{2})(\d{2})$/);if(m0)return`${m0[1]}-${m0[2]}-${m0[3]}`;
+  const m1=t.match(/(\d{4})[\-\/\.\s](\d{1,2})[\-\/\.\s](\d{1,2})/);
+  if(m1)return`${m1[1]}-${p2(m1[2])}-${p2(m1[3])}`;
   return null;
 }
-const wk = d => { const dt=new Date(d),j=new Date(dt.getFullYear(),0,1); return `${dt.getFullYear()}-W${p2(Math.ceil(((dt-j)/86400000+j.getDay()+1)/7))}`; };
-const mo = d => d.slice(0,7);
+const wk=d=>{const dt=new Date(d),j=new Date(dt.getFullYear(),0,1);return`${dt.getFullYear()}-W${p2(Math.ceil(((dt-j)/86400000+j.getDay()+1)/7))}`;};
+const mo=d=>d.slice(0,7);
 
-function parseSheet(ws, mode) {
-  if(mode === "subheader") {
-    const arr = XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false,blankrows:false});
-    if(arr.length < 3) return [];
-    const hdr = arr[0].map((h,i) => { const s=str(arr[1][i]); return (s && s!=="nan") ? s : str(h); });
-    return arr.slice(2).map(row => { const o={}; hdr.forEach((k,i)=>{o[k]=row[i]??""}); return o; });
+function parseSheet(ws,sub){
+  if(sub){
+    const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false,blankrows:false});
+    if(arr.length<3)return[];
+    const hdr=arr[0].map((h,i)=>{const v=sv(arr[1][i]);return(v&&v!=='nan')?v:sv(h);});
+    return arr.slice(2).map(row=>{const o={};hdr.forEach((k,i)=>{o[k]=row[i]??''});return o;});
   }
-  return XLSX.utils.sheet_to_json(ws,{defval:"",raw:false,blankrows:false});
+  return XLSX.utils.sheet_to_json(ws,{defval:'',raw:false,blankrows:false});
 }
 
-function detect(buf, filename) {
-  const wb = XLSX.read(buf,{type:"array",cellDates:true,raw:false});
-  const low = filename.toLowerCase();
-  function tryRule(rule) {
-    const mode = rule.name==="푸디스트" ? "subheader" : "normal";
-    for(const sn of wb.SheetNames) {
-      const rows = parseSheet(wb.Sheets[sn], mode);
-      if(!rows.length) continue;
-      const cols = Object.keys(rows[0]);
-      if(!rule.match(cols)) continue;
-      const parsed = rule.parse(rows);
-      if(parsed.length) return parsed;
+function detect(buf,filename){
+  const wb=XLSX.read(buf,{type:'array',cellDates:true,raw:false});
+  const low=filename.toLowerCase();
+  function tryR(rule){
+    const sub=rule.name==='푸디스트';
+    for(const sn of wb.SheetNames){
+      const rows=parseSheet(wb.Sheets[sn],sub);
+      if(!rows.length)continue;
+      if(!rule.detect(Object.keys(rows[0])))continue;
+      const parsed=rule.parse(rows);
+      if(parsed.length)return parsed;
     }
     return null;
   }
-  const byName = RULES.find(r => r.kw.some(k => low.includes(k)));
-  if(byName) { const r = tryRule(byName); if(r) return {rule:byName, rows:r}; }
-  for(const rule of RULES) { const r = tryRule(rule); if(r) return {rule, rows:r}; }
+  const byName=RULES.find(r=>r.kw.some(k=>low.includes(k)));
+  if(byName){const r=tryR(byName);if(r)return{rule:byName,rows:r};}
+  for(const rule of RULES){const r=tryR(rule);if(r)return{rule,rows:r};}
   return null;
 }
 
-async function saveFB(si, rows) {
-  const key = safeKey(RULES[si].name);
-  const obj = {}; rows.forEach(r => { obj[r._key] = r; });
-  await set(ref(db, `${DB}/${key}`), obj);
+async function saveFB(si,rows){
+  const key=sk(RULES[si].name);
+  const obj={};rows.forEach(r=>{obj[r._key]=r;});
+  await set(ref(db,`${DB}/${key}`),obj);
 }
 
-// ── 상태 ─────────────────────────────────────────────────────────
-const S = {
-  sups: RULES.map(r => ({name:r.name, color:r.color, rows:[]})),
-  dbStatus:"connecting", tab:"upload",
-  supFilter:"전체", view:"month",
-  search:"", selMat:"", msgs:{},
-  totalFilter:"전체", totalPeriod:"전체",
+const A={
+  sups:RULES.map(r=>({name:r.name,color:r.color,rows:[]})),
+  db:'connecting',tab:'upload',sf:'전체',view:'month',
+  srch:'',mat:'',msgs:{},tf:'전체',tp:'전체',
 };
 
-// ── Firebase ─────────────────────────────────────────────────────
-onValue(ref(db,DB), snap => {
-  const d = snap.val() || {};
-  S.sups = RULES.map(r => ({
-    name:r.name, color:r.color,
-    rows: Object.values(d[safeKey(r.name)] || {})
-  }));
-  S.dbStatus = "ok";
-  render();
-}, () => { S.dbStatus = "error"; render(); });
+onValue(ref(db,DB),snap=>{
+  const d=snap.val()||{};
+  A.sups=RULES.map(r=>({name:r.name,color:r.color,rows:Object.values(d[sk(r.name)]||{})}));
+  A.db='ok';renderAll();
+},()=>{A.db='error';renderAll();});
 
-// ── 파일 처리 ─────────────────────────────────────────────────────
-function handleFiles(files) {
-  [...files].forEach(file => {
-    const reader = new FileReader();
-    reader.onload = async e => {
-      try {
-        const result = detect(new Uint8Array(e.target.result), file.name);
-        if(!result) { setErr(`⚠️ "${file.name}" 인식 실패 — CJ·동원·푸디스트 파일인지 확인해주세요`); return; }
-        const {rule, rows:newRows} = result;
-        const si = RULES.findIndex(r => r.name === rule.name);
-        const existing = S.sups[si].rows;
-        const existKeys = new Set(existing.map(r => r._key));
-        const added = newRows.filter(r => !existKeys.has(r._key));
-        const merged = [...existing, ...added];
-        S.msgs[si] = "💾 저장중..."; render();
-        await saveFB(si, merged);
-        S.msgs[si] = `✅ ${rule.name} — ${added.length}건 추가 / 중복 ${newRows.length-added.length}건 / 누적 ${merged.length}건\n☁️ 클라우드 저장 완료`;
-        setErr(""); render();
-      } catch(err) { setErr(`❌ ${file.name}: ${err.message}`); }
+function handleFiles(files){
+  [...files].forEach(file=>{
+    const reader=new FileReader();
+    reader.onload=async e=>{
+      try{
+        const res=detect(new Uint8Array(e.target.result),file.name);
+        if(!res){setErr(`⚠️ "${file.name}" 인식 실패`);return;}
+        const{rule,rows:newRows}=res;
+        const si=RULES.findIndex(r=>r.name===rule.name);
+        const existing=A.sups[si].rows;
+        const existKeys=new Set(existing.map(r=>r._key));
+        const added=newRows.filter(r=>!existKeys.has(r._key));
+        const merged=[...existing,...added];
+        A.msgs[si]='💾 저장중...';renderHeader();renderUpload();
+        await saveFB(si,merged);
+        A.msgs[si]=`✅ ${rule.name} — ${added.length}건 추가 / 중복 ${newRows.length-added.length}건 / 누적 ${merged.length}건\n☁️ 클라우드 저장 완료`;
+        setErr('');renderHeader();renderUpload();
+      }catch(err){setErr(`❌ ${file.name}: ${err.message}`);}
     };
     reader.readAsArrayBuffer(file);
   });
 }
 
-async function resetAll() {
-  if(!confirm("전체 데이터를 삭제할까요?\n(클라우드에서도 삭제됩니다)")) return;
-  await set(ref(db,DB), null);
-  S.selMat=""; S.supFilter="전체"; S.msgs={};
-}
-async function resetSup(i) {
-  if(!confirm(`${S.sups[i].name} 데이터를 삭제할까요?`)) return;
-  await set(ref(db, `${DB}/${safeKey(RULES[i].name)}`), null);
-  S.msgs[i] = "";
-}
-function setErr(msg) { document.getElementById("errMsg").innerHTML = msg ? `<div class="err-box">${msg}</div>` : ""; }
+async function delAll(){if(!confirm('전체 데이터 삭제?'))return;await set(ref(db,DB),null);A.mat='';A.sf='전체';A.msgs={};}
+async function delSup(i){if(!confirm(`${A.sups[i].name} 삭제?`))return;await set(ref(db,`${DB}/${sk(RULES[i].name)}`),null);A.msgs[i]='';}
+function setErr(msg){document.getElementById('errMsg').innerHTML=msg?`<div class="err">${msg}</div>`:'';}
 
-// ── 이벤트 등록 ───────────────────────────────────────────────────
-document.getElementById("fileInput").addEventListener("change", e => { handleFiles(e.target.files); e.target.value=""; });
-document.getElementById("btnResetAll").addEventListener("click", resetAll);
+// 이벤트
+document.getElementById('fileIn').addEventListener('change',e=>{handleFiles(e.target.files);e.target.value='';});
+document.getElementById('btnDelAll').addEventListener('click',delAll);
+const dz=document.getElementById('dz');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');handleFiles(e.dataTransfer.files);});
 
-const dz = document.getElementById("dropZone");
-dz.addEventListener("dragover", e => { e.preventDefault(); dz.classList.add("drag"); });
-dz.addEventListener("dragleave", () => dz.classList.remove("drag"));
-dz.addEventListener("drop", e => { e.preventDefault(); dz.classList.remove("drag"); handleFiles(e.dataTransfer.files); });
-
-// 탭
-document.getElementById("tabBar").addEventListener("click", e => {
-  const btn = e.target.closest("[data-tab]");
-  if(btn) setTab(btn.dataset.tab);
+document.getElementById('tabBar').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-tab]');if(!btn)return;
+  A.tab=btn.dataset.tab;
+  document.querySelectorAll('.tab').forEach(el=>el.classList.toggle('on',el.dataset.tab===A.tab));
+  ['upload','chart','total','table'].forEach(t=>{document.getElementById(`tab-${t}`).style.display=t===A.tab?'block':'none';});
+  renderAll();
 });
 
-// 이벤트 위임 - 동적 버튼
-document.body.addEventListener("click", e => {
-  const btn = e.target.closest("[data-action]");
-  if(!btn) return;
-  const {action, val, idx} = btn.dataset;
-  const scrollY = window.scrollY; // 스크롤 위치 저장
-  if(action==="resetSup") resetSup(Number(idx));
-  if(action==="setFilter") { S.supFilter=val; S.selMat=""; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
-  if(action==="setView") { S.view=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
-  if(action==="setTotalFilter") { S.totalFilter=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
-  if(action==="setTotalPeriod") { S.totalPeriod=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
-  if(action==="selectMat") {
-    S.selMat = val;
-    // mat-item 선택 표시만 업데이트 (스크롤 변화 없음)
-    document.querySelectorAll(".mat-item").forEach(el => {
-      el.classList.toggle("sel", el.dataset.val === val);
-    });
-    // 통계+차트 영역만 부분 업데이트
-    updateStats();
-    requestAnimationFrame(()=>window.scrollTo(0, scrollY));
-  }
+// 자재 클릭 - 스크롤 고정 핵심
+document.getElementById('matList').addEventListener('click',e=>{
+  const item=e.target.closest('.mat-item');if(!item)return;
+  const val=item.dataset.val;if(!val||val===A.mat)return;
+  A.mat=val;
+  // mat-item 선택 표시만 바꿈 (DOM 교체 없음 → 스크롤 유지)
+  document.querySelectorAll('.mat-item').forEach(el=>el.classList.toggle('on',el.dataset.val===val));
+  // 통계 영역만 업데이트
+  document.getElementById('statsPanel').style.display='block';
+  renderStatGrid();
+  renderSupBars();
+  renderChartCard();
 });
 
-// 검색창
-document.body.addEventListener("input", e => {
-  if(e.target.dataset.action==="search") {
-    const scrollY = window.scrollY;
-    S.search = e.target.value;
-    // 자재 목록만 업데이트 (스크롤 유지)
-    const fd = filteredData();
-    const mats = [...new Set(fd.map(d=>d.material))].filter(Boolean).sort();
-    const filt = mats.filter(m=>m.toLowerCase().includes(S.search.toLowerCase()));
-    const supFilter = S.supFilter;
-    const selMat = S.selMat;
-    const listEl = document.querySelector(".mat-list");
-    if(listEl) {
-      let inner = "";
-      if(!filt.length) {
-        inner = `<div style="padding:12px;color:#4a6280;font-size:12px">검색 결과 없음</div>`;
-      } else if(supFilter==="푸디스트") {
-        const grps={};
-        filt.forEach(m=>{const g=grade(m,"푸디스트");if(!grps[g])grps[g]=[];grps[g].push(m);});
-        GRADE_ORDER.filter(g=>grps[g]).forEach(g=>{
-          inner+=`<div class="grade-hdr" style="color:${GRADE_COLOR[g]}">▸ ${g} (${grps[g].length}종)</div>`;
-          grps[g].forEach(m=>{inner+=`<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}"><span style="color:${GRADE_COLOR[g]};margin-right:5px;font-size:10px">●</span>${m}</div>`;});
-        });
-      } else {
-        filt.forEach(m=>{inner+=`<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}">${m}</div>`;});
-      }
-      listEl.innerHTML = inner;
-    }
-    requestAnimationFrame(()=>window.scrollTo(0,scrollY));
-  }
+document.getElementById('searchInp').addEventListener('input',e=>{
+  A.srch=e.target.value;
+  renderMatList(); // 목록만 갱신
 });
 
-function setTab(t) {
-  S.tab = t;
-  const tabs = ["upload","chart","total","table"];
-  document.querySelectorAll(".tab").forEach((el,i) => el.classList.toggle("active", tabs[i]===t));
-  tabs.forEach(n => { document.getElementById(`tab-${n}`).style.display = n===t ? "block" : "none"; });
-  render();
-}
+document.body.addEventListener('click',e=>{
+  const btn=e.target.closest('[data-act]');if(!btn)return;
+  const{act,val}=btn.dataset;
+  if(act==='sf'){A.sf=val;A.mat='';renderChartTab();}
+  if(act==='view'){A.view=val;renderChartCard();}
+  if(act==='tf'){A.tf=val;renderTotal();}
+  if(act==='tp'){A.tp=val;renderTotal();}
+  if(act==='dSup'){delSup(Number(val));}
+});
 
-// ── 등급 분류 ─────────────────────────────────────────────────────
-// CJ: 왕/특/대/중/식품(대)/식품(특)
-// 동원: 왕/특/대/중/고대
-// 푸디스트: 왕/특/대/중
-const GRADE_ORDER = ["왕란","특란","대란","중란","식품(특)","식품(대)","고대","기타"];
-const GRADE_COLOR = {
-  왕란:"#a78bfa", 특란:"#f59e0b", 대란:"#34d399", 중란:"#60a5fa",
-  "식품(특)":"#fb923c", "식품(대)":"#86efac", 고대:"#67e8f9", 기타:"#94a3b8"
-};
-const isEgg = m => !/구운란|메추리|만두|야끼|WB/.test(m);
-
-function grade(m, supplier) {
-  if(supplier === "CJ프레시웨이") {
-    if(/온라인용/.test(m) && /특란/.test(m)) return "식품(특)";
-    if(/온라인용/.test(m) && /대란/.test(m)) return "식품(대)";
-    if(/왕란/.test(m)) return "왕란";
-    if(/특란/.test(m)) return "특란";
-    if(/대란/.test(m)) return "대란";
-    if(/중란/.test(m)) return "중란";
-    return "기타";
-  }
-  if(supplier === "동원(시화+화성)") {
-    if(/고대/.test(m)) return "고대";
-    if(/왕란/.test(m)) return "왕란";
-    if(/특란/.test(m)) return "특란";
-    if(/대란/.test(m)) return "대란";
-    if(/중란/.test(m)) return "중란";
-    return "기타";
-  }
-  if(/왕란/.test(m)) return "왕란";
-  if(/특란/.test(m)) return "특란";
-  if(/대란/.test(m)) return "대란";
-  if(/중란/.test(m)) return "중란";
-  return "기타";
-}
-
-// ── 데이터 헬퍼 ───────────────────────────────────────────────────
-function allData() {
-  const r = [];
-  S.sups.forEach((s,si) => s.rows.forEach(row => r.push({...row, supplier:s.name, si})));
-  return r;
-}
-function filteredData() {
-  const a = allData();
-  return S.supFilter==="전체" ? a : a.filter(d => d.supplier===S.supFilter);
-}
-function applyPeriod(rows, period) {
-  if(period==="전체") return rows;
-  const today = new Date().toISOString().slice(0,10);
-  if(period==="이번주") return rows.filter(r => wk(r.date)===wk(today));
-  if(period==="이번달") return rows.filter(r => mo(r.date)===mo(today));
+// 데이터
+function allRows(){const r=[];A.sups.forEach((s,si)=>s.rows.forEach(row=>r.push({...row,sup:s.name,si})));return r;}
+function fRows(){const a=allRows();return A.sf==='전체'?a:a.filter(d=>d.sup===A.sf);}
+function pRows(rows,p){
+  if(p==='전체')return rows;
+  const t=new Date().toISOString().slice(0,10);
+  if(p==='이번주')return rows.filter(r=>wk(r.date)===wk(t));
+  if(p==='이번달')return rows.filter(r=>mo(r.date)===mo(t));
   return rows;
 }
+function mRows(){return fRows().filter(d=>d.material===A.mat);}
+// 토탈용 수량 (동원 ★ *5)
+function tQty(row){return(row.sup==='동원(시화+화성)'&&row.material.startsWith('★'))?row.qty*5:row.qty;}
 
-const FL = {"전체":"🔀 전체","CJ프레시웨이":"🟡 CJ","동원(시화+화성)":"🟢 동원","푸디스트":"🔵 푸디"};
+const GORDER=['왕란','특란','대란','중란','식품(특)','식품(대)','고대','기타'];
+const GCOLOR={왕란:'#a78bfa',특란:'#f59e0b',대란:'#34d399',중란:'#60a5fa','식품(특)':'#fb923c','식품(대)':'#86efac',고대:'#67e8f9',기타:'#94a3b8'};
+const isEgg=m=>!/구운란|메추리|만두|야끼|WB/.test(m);
 
-function filterBtns(current, actionName) {
-  return `<div class="filter-row">${["전체",...RULES.map(r=>r.name)].map(opt => {
-    const rule = RULES.find(r => r.name===opt);
-    const col = rule ? rule.color : "#fbbf24";
-    const act = current===opt;
-    return `<button class="fbtn" data-action="${actionName}" data-val="${opt}" style="background:${act?col:"#0d1b2e"};color:${act?"#07101f":col};border-color:${col}">${FL[opt]}</button>`;
-  }).join("")}</div>`;
+function gradeOf(m,sup){
+  if(sup==='CJ프레시웨이'){
+    if(/온라인용/.test(m)&&/특란/.test(m))return'식품(특)';
+    if(/온라인용/.test(m)&&/대란/.test(m))return'식품(대)';
+  }
+  if(sup==='동원(시화+화성)'&&/고대/.test(m))return'고대';
+  if(/왕란/.test(m))return'왕란';
+  if(/특란/.test(m))return'특란';
+  if(/대란/.test(m))return'대란';
+  if(/중란/.test(m))return'중란';
+  return'기타';
 }
 
-// ── 렌더링 ────────────────────────────────────────────────────────
-function render() {
-  const {sups, dbStatus, msgs} = S;
-  const total = sups.reduce((s,x) => s+x.rows.length, 0);
-  document.getElementById("totalRows").textContent = total.toLocaleString();
+const FL={'전체':'🔀 전체','CJ프레시웨이':'🟡 CJ','동원(시화+화성)':'🟢 동원','푸디스트':'🔵 푸디'};
+function fRow(cur,act){
+  return`<div class="frow">${['전체',...RULES.map(r=>r.name)].map(opt=>{
+    const rule=RULES.find(r=>r.name===opt);
+    const col=rule?rule.color:'#fbbf24';
+    const on=cur===opt;
+    return`<button class="fbtn" data-act="${act}" data-val="${opt}" style="background:${on?col:'#0d1b2e'};color:${on?'#07101f':col};border-color:${col}">${FL[opt]}</button>`;
+  }).join('')}</div>`;
+}
 
-  const dbC  = dbStatus==="ok"?"#34d399":dbStatus==="error"?"#f87171":"#60a5fa";
-  const dbBg = dbStatus==="ok"?"#063020":dbStatus==="error"?"#3f0f0f":"#1a2f50";
-  const dbTx = dbStatus==="ok"?"☁️ 클라우드 연결됨":dbStatus==="error"?"⚠️ 연결 실패":"☁️ 연결중...";
-  document.getElementById("badges").innerHTML =
-    `<span class="badge" style="background:${dbBg};color:${dbC};border:1px solid ${dbC}44">${dbTx}</span>` +
-    sups.map(s => `<span class="badge" style="background:${s.rows.length?"#063020":"#0d1b2e"};color:${s.rows.length?s.color:"#4a6280"};border:1px solid ${s.rows.length?s.color:"#1a2f50"}">${s.rows.length?"✓":"○"} ${s.name} (${s.rows.length})</span>`).join("");
+function renderAll(){renderHeader();renderUpload();renderChartTab();renderTotal();renderTable();}
 
-  const hints = ["납품일자 · 상품명 · 발주수량","배송일자 · 상품명 · 최종주문량 (★×5)","입고일 · 자재명 · 현재수량"];
-  const lastDates = sups.map(s => s.rows.length ? s.rows.reduce((a,b)=>a.date>b.date?a:b).date : null);
-  document.getElementById("supCards").innerHTML = sups.map((sup,i) => {
-    const last = lastDates[i];
-    const has = sup.rows.length > 0;
-    return `<div class="card" style="border-color:${has?sup.color+"44":"#1a2f50"}">
+function renderHeader(){
+  const tot=A.sups.reduce((s,x)=>s+x.rows.length,0);
+  document.getElementById('hTot').textContent=tot.toLocaleString();
+  const dbC=A.db==='ok'?'#34d399':A.db==='error'?'#f87171':'#60a5fa';
+  const dbBg=A.db==='ok'?'#063020':A.db==='error'?'#3f0f0f':'#1a2f50';
+  const dbTx=A.db==='ok'?'☁️ 클라우드 연결됨':A.db==='error'?'⚠️ 연결 실패':'☁️ 연결중...';
+  document.getElementById('hBadges').innerHTML=
+    `<span class="badge" style="background:${dbBg};color:${dbC};border:1px solid ${dbC}44">${dbTx}</span>`+
+    A.sups.map(s=>`<span class="badge" style="background:${s.rows.length?'#063020':'#0d1b2e'};color:${s.rows.length?s.color:'#4a6280'};border:1px solid ${s.rows.length?s.color:'#1a2f50'}">${s.rows.length?'✓':'○'} ${s.name} (${s.rows.length})</span>`).join('');
+}
+
+function renderUpload(){
+  if(A.tab!=='upload')return;
+  const hints=['납품일자 · 상품명 · 발주수량','배송일자 · 상품명 · 최종주문량 (★×5는 토탈에서)','입고일 · 자재명 · 현재수량'];
+  const lasts=A.sups.map(s=>s.rows.length?s.rows.reduce((a,b)=>a.date>b.date?a:b).date:null);
+  document.getElementById('supCards').innerHTML=A.sups.map((sup,i)=>{
+    const has=sup.rows.length>0;
+    return`<div class="card" style="border-color:${has?sup.color+'44':'#1a2f50'}">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${has?10:6}px">
         <div style="display:flex;align-items:center;gap:8px">
-          <div style="width:11px;height:11px;border-radius:50%;background:${sup.color};${has?"box-shadow:0 0 6px "+sup.color+"88":""}"></div>
+          <div style="width:11px;height:11px;border-radius:50%;background:${sup.color};${has?'box-shadow:0 0 6px '+sup.color+'88':''}"></div>
           <span style="font-size:13px;font-weight:700;color:${sup.color}">${sup.name}</span>
         </div>
-        <div style="display:flex;gap:6px;align-items:center">
-          ${has ? `<span style="font-size:11px;color:#34d399;font-weight:700">☁️ ${sup.rows.length}건</span>
-          <button class="del-btn" data-action="resetSup" data-idx="${i}">삭제</button>` : ""}
-        </div>
+        ${has?`<div style="display:flex;gap:6px;align-items:center">
+          <span style="font-size:11px;color:#34d399;font-weight:700">☁️ ${sup.rows.length}건</span>
+          <button class="delbtn" data-act="dSup" data-val="${i}">삭제</button>
+        </div>`:''}
       </div>
-      ${has ? `<div style="display:flex;gap:8px;margin-bottom:10px">
+      ${has?`<div style="display:flex;gap:8px;margin-bottom:10px">
         <div style="flex:1;background:#07101f;border-radius:8px;padding:8px 10px">
           <div style="font-size:10px;color:#4a6280;margin-bottom:2px">최근 납품일</div>
-          <div style="font-size:13px;font-weight:700;color:#e2e8f0">${last}</div>
+          <div style="font-size:13px;font-weight:700">${lasts[i]||'-'}</div>
         </div>
         <div style="flex:1;background:#07101f;border-radius:8px;padding:8px 10px">
           <div style="font-size:10px;color:#4a6280;margin-bottom:2px">누적 발주건</div>
           <div style="font-size:13px;font-weight:700;color:${sup.color}">${sup.rows.length.toLocaleString()}건</div>
         </div>
-      </div>` : ""}
-      ${msgs[i] ? `<div class="msg" style="color:${msgs[i].startsWith("✅")?"#86efac":msgs[i].startsWith("💾")?"#60a5fa":"#f87171"}">${msgs[i]}</div>` : ""}
-      ${!has && !msgs[i] ? `<div style="font-size:11px;color:#4a6280;margin-top:2px">아직 데이터 없음 — 위에서 파일 업로드</div>` : ""}
+      </div>`:''}
+      ${A.msgs[i]?`<div class="msg" style="color:${A.msgs[i].startsWith('✅')?'#86efac':A.msgs[i].startsWith('💾')?'#60a5fa':'#f87171'}">${A.msgs[i]}</div>`:''}
+      ${!has&&!A.msgs[i]?`<div style="font-size:11px;color:#4a6280;margin-top:2px">아직 데이터 없음 — 위에서 파일 업로드</div>`:''}
       <div style="font-size:10px;color:#2a4060;margin-top:8px;padding-top:8px;border-top:1px solid #1a2f5066">📌 ${hints[i]}</div>
     </div>`;
-  }).join("");
-
-  if(S.tab==="chart") renderChart();
-  if(S.tab==="total") renderTotal();
-  if(S.tab==="table") renderTable();
+  }).join('');
 }
 
-// ── 통계+차트 영역만 업데이트 (스크롤 유지용) ───────────────────
-function updateStats() {
-  const {supFilter, view, selMat} = S;
-  if(!selMat) return;
-
-  // stat-grid, 납품처별 바, 차트 카드 영역 업데이트
-  const fd = filteredData();
-  const matRows = fd.filter(d => d.material === selMat);
-  const totalQ = matRows.reduce((s,d) => s+d.qty, 0);
-  const today = new Date().toISOString().slice(0,10);
-  const weekQ = matRows.filter(d=>wk(d.date)===wk(today)).reduce((s,d)=>s+d.qty,0);
-  const monQ  = matRows.filter(d=>mo(d.date)===mo(today)).reduce((s,d)=>s+d.qty,0);
-
-  // stat-grid 업데이트
-  const sg = document.querySelector(".stat-grid");
-  if(sg) {
-    const vals = sg.querySelectorAll(".stat-val");
-    if(vals[0]) vals[0].textContent = totalQ.toLocaleString();
-    if(vals[1]) vals[1].textContent = monQ.toLocaleString();
-    if(vals[2]) vals[2].textContent = weekQ.toLocaleString();
+function renderChartTab(){
+  if(A.tab!=='chart')return;
+  const tot=A.sups.reduce((s,x)=>s+x.rows.length,0);
+  document.getElementById('chartFilters').innerHTML=fRow(A.sf,'sf');
+  if(!tot){document.getElementById('matList').innerHTML=`<div class="empty">데이터 탭에서 파일을 업로드해주세요</div>`;return;}
+  const fd=fRows();
+  const mats=[...new Set(fd.map(d=>d.material))].filter(Boolean).sort();
+  document.getElementById('matLbl').textContent=`🔍 자재 선택 — ${mats.length}종`;
+  document.getElementById('searchInp').value=A.srch;
+  renderMatList();
+  if(A.mat){
+    document.getElementById('statsPanel').style.display='block';
+    renderStatGrid();renderSupBars();renderChartCard();
+  } else {
+    document.getElementById('statsPanel').style.display='none';
   }
-
-  // stat-grid 없으면 (첫 선택) 전체 차트 다시 그리기
-  if(!sg) {
-    renderChart();
-    return;
-  }
-
-  // 납품처별 바 업데이트
-  document.querySelectorAll(".bar-fill").forEach((el,i) => {
-    const q = matRows.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
-    el.style.width = totalQ>0 ? (q/totalQ*100)+"%" : "0%";
-  });
-  document.querySelectorAll(".bar-val").forEach((el,i) => {
-    const q = matRows.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
-    el.textContent = q.toLocaleString();
-  });
 }
 
-// ── 차트 탭 ──────────────────────────────────────────────────────
-function renderChart() {
-  const el = document.getElementById("chartContent");
-  const {dbStatus, supFilter, view, search, selMat} = S;
-  const total = S.sups.reduce((s,x)=>s+x.rows.length,0);
-
-  if(dbStatus==="connecting") { el.innerHTML=`<div class="empty">☁️ 데이터 불러오는 중...</div>`; return; }
-  if(dbStatus==="error") { el.innerHTML=`<div class="card empty">⚠️ 클라우드 연결 실패<br>인터넷을 확인해주세요</div>`; return; }
-  if(total===0) { el.innerHTML=`<div class="card empty">📁<br><br>컴퓨터에서 파일을 업로드하면<br>여기서 자동으로 보입니다</div>`; return; }
-
-  const fd = filteredData();
-  const mats = [...new Set(fd.map(d=>d.material))].filter(Boolean).sort();
-  const filt = mats.filter(m => m.toLowerCase().includes(search.toLowerCase()));
-  const supColor = S.sups.find(s=>s.name===supFilter)?.color || "#fbbf24";
-
-  let html = filterBtns(supFilter, "setFilter");
-
-  // 자재 목록
-  html += `<div class="card">
-    <div class="lbl">🔍 자재 선택 — ${mats.length}종${supFilter!=="전체"?` <span style="font-size:10px;color:${supColor};font-weight:400">(${supFilter})</span>`:""}</div>
-    <input class="search-inp" placeholder="자재명 검색..." value="${search.replace(/"/g,"&quot;")}" data-action="search"/>
-    <div class="mat-list">`;
-
-  if(!filt.length) {
-    html += `<div style="padding:12px;color:#4a6280;font-size:12px">검색 결과 없음</div>`;
-  } else if(supFilter==="푸디스트") {
-    const grps = {};
-    filt.forEach(m => { const g=grade(m,"푸디스트"); if(!grps[g])grps[g]=[]; grps[g].push(m); });
-    GRADE_ORDER.filter(g=>grps[g]).forEach(g => {
-      html += `<div class="grade-hdr" style="color:${GRADE_COLOR[g]}">▸ ${g} (${grps[g].length}종)</div>`;
-      grps[g].forEach(m => { html += `<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}"><span style="color:${GRADE_COLOR[g]};margin-right:5px;font-size:10px">●</span>${m}</div>`; });
+function renderMatList(){
+  const fd=fRows();
+  const mats=[...new Set(fd.map(d=>d.material))].filter(Boolean).sort();
+  const filt=mats.filter(m=>m.toLowerCase().includes(A.srch.toLowerCase()));
+  const el=document.getElementById('matList');
+  if(!filt.length){el.innerHTML=`<div style="padding:12px;color:#4a6280;font-size:12px">검색 결과 없음</div>`;return;}
+  let html='';
+  if(A.sf==='푸디스트'){
+    const grps={};
+    filt.forEach(m=>{const g=gradeOf(m,'푸디스트');if(!grps[g])grps[g]=[];grps[g].push(m);});
+    GORDER.filter(g=>grps[g]).forEach(g=>{
+      html+=`<div class="grade-hdr" style="color:${GCOLOR[g]}">▸ ${g} (${grps[g].length}종)</div>`;
+      grps[g].forEach(m=>{html+=`<div class="mat-item${m===A.mat?' on':''}" data-val="${m.replace(/"/g,'&quot;')}"><span style="color:${GCOLOR[g]};margin-right:5px;font-size:10px">●</span>${m}</div>`;});
     });
   } else {
-    filt.forEach(m => { html += `<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}">${m}</div>`; });
+    filt.forEach(m=>{html+=`<div class="mat-item${m===A.mat?' on':''}" data-val="${m.replace(/"/g,'&quot;')}">${m}</div>`;});
   }
-  html += `</div></div>`;
-
-  if(selMat) {
-    const matRows = fd.filter(d=>d.material===selMat);
-    const totalQ = matRows.reduce((s,d)=>s+d.qty, 0);
-    const today = new Date().toISOString().slice(0,10);
-    const weekQ = matRows.filter(d=>wk(d.date)===wk(today)).reduce((s,d)=>s+d.qty,0);
-    const monQ  = matRows.filter(d=>mo(d.date)===mo(today)).reduce((s,d)=>s+d.qty,0);
-
-    html += `<div class="stat-grid">
-      <div class="stat-card" style="border:1px solid #fbbf2444"><div class="stat-val" style="color:#fbbf24">${totalQ.toLocaleString()}</div><div class="stat-lbl">총 누적</div></div>
-      <div class="stat-card" style="border:1px solid #34d39944"><div class="stat-val" style="color:#34d399">${monQ.toLocaleString()}</div><div class="stat-lbl">이번달</div></div>
-      <div class="stat-card" style="border:1px solid #60a5fa44"><div class="stat-val" style="color:#60a5fa">${weekQ.toLocaleString()}</div><div class="stat-lbl">이번주</div></div>
-    </div>`;
-
-    if(supFilter==="전체") {
-      html += `<div class="card"><div class="lbl">🏭 납품처별 발주량</div>`;
-      S.sups.forEach((s,i) => {
-        const q = matRows.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
-        html += `<div class="bar-row">
-          <span class="bar-name" style="color:${s.color}">${s.name}</span>
-          <div class="bar-track"><div class="bar-fill" style="background:${s.color};width:${totalQ>0?(q/totalQ*100):0}%"></div></div>
-          <span class="bar-val" style="color:#e2e8f0">${q.toLocaleString()}</span></div>`;
-      });
-      html += `</div>`;
-    }
-
-    // SVG 차트
-    const fn = view==="week" ? wk : mo;
-    const grps = {};
-    matRows.forEach(d => {
-      const k = fn(d.date); if(!grps[k]) grps[k]={period:k};
-      const key = supFilter==="전체" ? d.supplier : "수량";
-      grps[k][key] = (grps[k][key]||0) + d.qty;
-    });
-    const cd = Object.values(grps).sort((a,b)=>a.period.localeCompare(b.period));
-    const ck = supFilter==="전체" ? S.sups.map(s=>({name:s.name,color:s.color})) : [{name:"수량",color:supColor}];
-
-    html += `<div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <span class="lbl">📈 기간별 발주 추이</span>
-        <div style="display:flex;gap:6px">
-          <button class="vbtn" data-action="setView" data-val="week" style="background:${view==="week"?"#fbbf24":"#07101f"};color:${view==="week"?"#07101f":"#4a6280"};border-color:${view==="week"?"#fbbf24":"#1a2f50"}">주간</button>
-          <button class="vbtn" data-action="setView" data-val="month" style="background:${view==="month"?"#fbbf24":"#07101f"};color:${view==="month"?"#07101f":"#4a6280"};border-color:${view==="month"?"#fbbf24":"#1a2f50"}">월간</button>
-        </div>
-      </div>`;
-
-    if(cd.length > 0) {
-      const W=460,H=180,PL=38,PB=28,PT=8,PR=8,iW=W-PL-PR,iH=H-PT-PB;
-      const maxV = Math.max(...cd.map(d=>ck.reduce((s,k)=>s+(d[k.name]||0),0)),1);
-      const bW = cd.length===1 ? 60 : Math.min(36, iW/cd.length-4);
-      let svg = `<svg class="chart-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="Noto Sans KR,sans-serif">`;
-      [0,0.25,0.5,0.75,1].forEach(r => {
-        const v=Math.round(maxV*r), y=PT+iH-r*iH;
-        svg += `<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#1a2f50" stroke-dasharray="3,3"/>`;
-        svg += `<text x="${PL-4}" y="${y+4}" text-anchor="end" font-size="8" fill="#4a6280">${v>=1000?(v/1000).toFixed(1)+"k":v}</text>`;
-      });
-      cd.forEach((d,i) => {
-        const xSlot = iW/cd.length;
-        const x = cd.length===1 ? PL+iW/2-bW/2 : PL+i*xSlot+(xSlot-bW)/2;
-        let cumY = PT+iH;
-        ck.forEach(k => {
-          const v=d[k.name]||0; if(!v) return;
-          const bH=(v/maxV)*iH; cumY-=bH;
-          svg += `<rect x="${x}" y="${cumY}" width="${bW}" height="${bH}" fill="${k.color}" rx="2"/>`;
-        });
-        svg += `<text x="${x+bW/2}" y="${H-6}" text-anchor="middle" font-size="8" fill="#4a6280">${d.period.replace(/^\d{4}-/,"")}</text>`;
-      });
-      let lx = PL;
-      ck.forEach(k => { svg+=`<rect x="${lx}" y="${H-18}" width="8" height="8" fill="${k.color}" rx="1"/><text x="${lx+11}" y="${H-10}" font-size="9" fill="#94a3b8">${k.name}</text>`; lx+=k.name.length*7+20; });
-      svg += `</svg>`;
-      html += `<div class="chart-scroll">${svg}</div>`;
-    } else {
-      html += `<div style="text-align:center;color:#4a6280;font-size:12px;padding:20px">해당 기간 데이터 없음</div>`;
-    }
-    html += `</div>`;
-  } else {
-    html += `<div class="card empty">위에서 자재를 선택하면 통계와 그래프가 나타납니다</div>`;
-  }
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-// ── 토탈 탭 ──────────────────────────────────────────────────────
-function renderTotal() {
-  const el = document.getElementById("totalContent");
-  const {dbStatus, totalFilter, totalPeriod} = S;
-  const total = S.sups.reduce((s,x)=>s+x.rows.length,0);
+function renderStatGrid(){
+  const mr=mRows();
+  const tot=mr.reduce((s,d)=>s+d.qty,0);
+  const td=new Date().toISOString().slice(0,10);
+  const wkQ=mr.filter(d=>wk(d.date)===wk(td)).reduce((s,d)=>s+d.qty,0);
+  const moQ=mr.filter(d=>mo(d.date)===mo(td)).reduce((s,d)=>s+d.qty,0);
+  document.getElementById('statGrid').innerHTML=`
+    <div class="sc" style="border:1px solid #fbbf2444"><div class="sv" style="color:#fbbf24">${tot.toLocaleString()}</div><div class="sl">총 누적</div></div>
+    <div class="sc" style="border:1px solid #34d39944"><div class="sv" style="color:#34d399">${moQ.toLocaleString()}</div><div class="sl">이번달</div></div>
+    <div class="sc" style="border:1px solid #60a5fa44"><div class="sv" style="color:#60a5fa">${wkQ.toLocaleString()}</div><div class="sl">이번주</div></div>`;
+}
 
-  if(dbStatus==="connecting") { el.innerHTML=`<div class="empty">☁️ 데이터 불러오는 중...</div>`; return; }
-  if(dbStatus==="error") { el.innerHTML=`<div class="card empty">⚠️ 클라우드 연결 실패</div>`; return; }
-  if(total===0) { el.innerHTML=`<div class="card empty">📁<br><br>데이터 탭에서 파일을 업로드해주세요</div>`; return; }
+function renderSupBars(){
+  const el=document.getElementById('supBars');
+  if(A.sf!=='전체'){el.style.display='none';return;}
+  el.style.display='block';
+  const mr=mRows();
+  const tot=mr.reduce((s,d)=>s+d.qty,0);
+  el.innerHTML=`<div class="lbl">🏭 납품처별 발주량</div>`+
+    A.sups.map((sup,i)=>{
+      const q=mr.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
+      return`<div class="bar-row">
+        <span class="bar-name" style="color:${sup.color}">${sup.name}</span>
+        <div class="bar-track"><div class="bar-fill" style="background:${sup.color};width:${tot>0?(q/tot*100):0}%"></div></div>
+        <span class="bar-val">${q.toLocaleString()}</span></div>`;
+    }).join('');
+}
 
-  let html = filterBtns(totalFilter, "setTotalFilter");
+function renderChartCard(){
+  const el=document.getElementById('chartCard');
+  const mr=mRows();
+  const fn=A.view==='week'?wk:mo;
+  const grps={};
+  mr.forEach(d=>{const k=fn(d.date);if(!grps[k])grps[k]={period:k};const key=A.sf==='전체'?d.sup:'수량';grps[k][key]=(grps[k][key]||0)+d.qty;});
+  const cd=Object.values(grps).sort((a,b)=>a.period.localeCompare(b.period));
+  const ck=A.sf==='전체'?A.sups.map(s=>({name:s.name,color:s.color})):[{name:'수량',color:A.sups.find(s=>s.name===A.sf)?.color||'#60a5fa'}];
 
-  // 기간 필터
-  const periods = ["전체","이번주","이번달"];
-  html += `<div class="filter-row">${periods.map(p => {
-    const act = totalPeriod===p;
-    return `<button class="fbtn" data-action="setTotalPeriod" data-val="${p}" style="background:${act?"#fbbf24":"#0d1b2e"};color:${act?"#07101f":"#4a6280"};border-color:${act?"#fbbf24":"#1a2f50"}">${p}</button>`;
-  }).join("")}</div>`;
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+    <span class="lbl" style="margin:0">📈 기간별 발주 추이</span>
+    <div style="display:flex;gap:6px">
+      <button class="vbtn" data-act="view" data-val="week" style="background:${A.view==='week'?'#fbbf24':'#07101f'};color:${A.view==='week'?'#07101f':'#4a6280'};border-color:${A.view==='week'?'#fbbf24':'#1a2f50'}">주간</button>
+      <button class="vbtn" data-act="view" data-val="month" style="background:${A.view==='month'?'#fbbf24':'#07101f'};color:${A.view==='month'?'#07101f':'#4a6280'};border-color:${A.view==='month'?'#fbbf24':'#1a2f50'}">월간</button>
+    </div></div>`;
 
-  const supList = totalFilter==="전체" ? RULES : RULES.filter(r=>r.name===totalFilter);
-
-  supList.forEach(rule => {
-    const si = RULES.findIndex(r=>r.name===rule.name);
-    const rows = applyPeriod(S.sups[si].rows, totalPeriod);
-
-    const matTotals = {};
-    rows.forEach(r => {
-      const m = r.material;
-      if(!isEgg(m)) return;
-      if(!matTotals[m]) matTotals[m] = 0;
-      // 동원 ★ 품목: 토탈에서만 *5 (판→개)
-      const qty = (rule.name==="동원(시화+화성)" && m.startsWith("★")) ? r.qty*5 : r.qty;
-      matTotals[m] += qty;
+  if(!cd.length){html+=`<div style="text-align:center;color:#4a6280;font-size:12px;padding:20px">해당 기간 데이터 없음</div>`;}
+  else{
+    const W=460,H=180,PL=38,PB=28,PT=8,PR=8,iW=W-PL-PR,iH=H-PT-PB;
+    const maxV=Math.max(...cd.map(d=>ck.reduce((s,k)=>s+(d[k.name]||0),0)),1);
+    const bW=cd.length===1?60:Math.min(36,iW/cd.length-4);
+    let svg=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="Noto Sans KR,sans-serif">`;
+    [0,.25,.5,.75,1].forEach(r=>{
+      const v=Math.round(maxV*r),y=PT+iH-r*iH;
+      svg+=`<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#1a2f50" stroke-dasharray="3,3"/>`;
+      svg+=`<text x="${PL-4}" y="${y+4}" text-anchor="end" font-size="8" fill="#4a6280">${v>=1000?(v/1000).toFixed(1)+'k':v}</text>`;
     });
-    const grandTotal = Object.values(matTotals).reduce((a,b)=>a+b, 0);
-    if(grandTotal===0) return;
+    cd.forEach((d,i)=>{
+      const xs=iW/cd.length,x=cd.length===1?PL+iW/2-bW/2:PL+i*xs+(xs-bW)/2;
+      let cy=PT+iH;
+      ck.forEach(k=>{const v=d[k.name]||0;if(!v)return;const bH=(v/maxV)*iH;cy-=bH;svg+=`<rect x="${x}" y="${cy}" width="${bW}" height="${bH}" fill="${k.color}" rx="2"/>`;});
+      svg+=`<text x="${x+bW/2}" y="${H-6}" text-anchor="middle" font-size="8" fill="#4a6280">${d.period.replace(/^\d{4}-/,'')}</text>`;
+    });
+    let lx=PL;
+    ck.forEach(k=>{svg+=`<rect x="${lx}" y="${H-18}" width="8" height="8" fill="${k.color}" rx="1"/><text x="${lx+11}" y="${H-10}" font-size="9" fill="#94a3b8">${k.name}</text>`;lx+=k.name.length*7+20;});
+    svg+=`</svg>`;
+    html+=`<div class="chart-scroll">${svg}</div>`;
+  }
+  el.innerHTML=html;
+}
 
-    html += `<div class="card">
-      <div class="total-sup-hdr">
+function renderTotal(){
+  if(A.tab!=='total')return;
+  const el=document.getElementById('totalContent');
+  const tot=A.sups.reduce((s,x)=>s+x.rows.length,0);
+  if(A.db==='connecting'){el.innerHTML=`<div class="empty">☁️ 불러오는 중...</div>`;return;}
+  if(!tot){el.innerHTML=`<div class="card empty">📁 데이터 탭에서 파일을 업로드해주세요</div>`;return;}
+
+  let html=fRow(A.tf,'tf');
+  html+=`<div class="frow">${['전체','이번주','이번달'].map(p=>{
+    const on=A.tp===p;
+    return`<button class="fbtn" data-act="tp" data-val="${p}" style="background:${on?'#fbbf24':'#0d1b2e'};color:${on?'#07101f':'#4a6280'};border-color:${on?'#fbbf24':'#1a2f50'}">${p}</button>`;
+  }).join('')}</div>`;
+
+  const supList=A.tf==='전체'?RULES:RULES.filter(r=>r.name===A.tf);
+  supList.forEach(rule=>{
+    const si=RULES.findIndex(r=>r.name===rule.name);
+    const rows=pRows(A.sups[si].rows,A.tp);
+    const matTot={};
+    rows.forEach(r=>{
+      if(!isEgg(r.material))return;
+      const q=(rule.name==='동원(시화+화성)'&&r.material.startsWith('★'))?r.qty*5:r.qty;
+      if(!matTot[r.material])matTot[r.material]=0;
+      matTot[r.material]+=q;
+    });
+    const grand=Object.values(matTot).reduce((a,b)=>a+b,0);
+    if(!grand)return;
+
+    html+=`<div class="card">
+      <div class="tsup-hdr">
         <div style="width:12px;height:12px;border-radius:50%;background:${rule.color}"></div>
         <span style="color:${rule.color}">${rule.name}</span>
         <span style="font-size:11px;color:#4a6280;font-weight:400;margin-left:auto">${rows.length}건</span>
       </div>`;
 
-    const groups = {};
-    Object.entries(matTotals).forEach(([m,q]) => {
-      const g = grade(m, rule.name);
-      if(!groups[g]) groups[g] = {items:[], total:0};
-      groups[g].items.push({m,q});
-      groups[g].total += q;
+    const grps={};
+    Object.entries(matTot).forEach(([m,q])=>{
+      const g=gradeOf(m,rule.name);
+      if(!grps[g])grps[g]={items:[],total:0};
+      grps[g].items.push({m,q});grps[g].total+=q;
     });
 
-    GRADE_ORDER.filter(g=>groups[g]).forEach(g => {
-      const gc = GRADE_COLOR[g];
-      const grp = groups[g];
-      html += `<div class="total-grade-hdr" style="color:${gc}">▸ ${g} — 합계 <b style="color:${gc}">${grp.total.toLocaleString()}</b>개</div>`;
-      grp.items.sort((a,b)=>b.q-a.q).forEach(({m,q}) => {
-        html += `<div class="total-row">
-          <span class="total-mat"><span style="color:${gc};font-size:9px;margin-right:5px">●</span>${m}</span>
-          <span class="total-qty" style="color:${gc}">${q.toLocaleString()}</span>
-        </div>`;
+    GORDER.filter(g=>grps[g]).forEach(g=>{
+      const gc=GCOLOR[g],grp=grps[g];
+      html+=`<div class="tghdr" style="color:${gc}">▸ ${g} — 합계 <b style="color:${gc}">${grp.total.toLocaleString()}</b>개</div>`;
+      grp.items.sort((a,b)=>b.q-a.q).forEach(({m,q})=>{
+        html+=`<div class="trow"><span class="tmat"><span style="color:${gc};font-size:9px;margin-right:5px">●</span>${m}</span><span class="tqty" style="color:${gc}">${q.toLocaleString()}</span></div>`;
       });
     });
-
-    html += `<div class="grand-total">
-      <span style="font-size:13px;font-weight:700;color:#e2e8f0">총 발주량</span>
-      <span style="font-size:18px;font-weight:800;color:#fbbf24">${grandTotal.toLocaleString()} 개</span>
-    </div></div>`;
+    html+=`<div class="grand"><span style="font-size:13px;font-weight:700">총 발주량</span><span style="font-size:18px;font-weight:800;color:#fbbf24">${grand.toLocaleString()} 개</span></div></div>`;
   });
 
-  // 전체 통합
-  if(totalFilter==="전체") {
-    const allRows = applyPeriod(allData(), totalPeriod).filter(r=>isEgg(r.material));
-    const grandAll = allRows.reduce((s,d)=>s+d.qty, 0);
-    const gradeAll = {};
-    allRows.forEach(r => {
-      const qty = (r.supplier==="동원(시화+화성)" && r.material.startsWith("★")) ? r.qty*5 : r.qty;
-      const g = grade(r.material,r.supplier);
-      gradeAll[g] = (gradeAll[g]||0) + qty;
-    });
-
-    html += `<div class="card" style="border-color:#fbbf2444">
+  if(A.tf==='전체'){
+    const ar=pRows(allRows(),A.tp).filter(r=>isEgg(r.material));
+    const gAll={};
+    ar.forEach(r=>{const q=tQty(r);const g=gradeOf(r.material,r.sup);gAll[g]=(gAll[g]||0)+q;});
+    const grand=Object.values(gAll).reduce((a,b)=>a+b,0);
+    html+=`<div class="card" style="border-color:#fbbf2444">
       <div style="font-size:14px;font-weight:800;color:#fbbf24;margin-bottom:12px">📊 전체 통합 발주량</div>
-      ${GRADE_ORDER.filter(g=>gradeAll[g]).map(g=>`
-        <div class="bar-row">
-          <span class="bar-name" style="color:${GRADE_COLOR[g]}">${g}</span>
-          <div class="bar-track"><div class="bar-fill" style="background:${GRADE_COLOR[g]};width:${grandAll>0?(gradeAll[g]/grandAll*100):0}%"></div></div>
-          <span class="bar-val" style="color:${GRADE_COLOR[g]}">${gradeAll[g].toLocaleString()}</span>
-        </div>`).join("")}
-      <div class="grand-total" style="margin-top:12px">
-        <span style="font-size:13px;font-weight:700;color:#e2e8f0">3사 합계</span>
-        <span style="font-size:18px;font-weight:800;color:#fbbf24">${grandAll.toLocaleString()} 개</span>
-      </div>
-    </div>`;
+      ${GORDER.filter(g=>gAll[g]).map(g=>`<div class="bar-row">
+        <span class="bar-name" style="color:${GCOLOR[g]}">${g}</span>
+        <div class="bar-track"><div class="bar-fill" style="background:${GCOLOR[g]};width:${grand>0?(gAll[g]/grand*100):0}%"></div></div>
+        <span class="bar-val" style="color:${GCOLOR[g]}">${gAll[g].toLocaleString()}</span>
+      </div>`).join('')}
+      <div class="grand" style="margin-top:12px">
+        <span style="font-size:13px;font-weight:700">3사 합계</span>
+        <span style="font-size:18px;font-weight:800;color:#fbbf24">${grand.toLocaleString()} 개</span>
+      </div></div>`;
   }
-
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-// ── 내역 탭 ──────────────────────────────────────────────────────
-function renderTable() {
-  const el = document.getElementById("tableContent");
-  const total = S.sups.reduce((s,x)=>s+x.rows.length,0);
-  let html = total>0 ? filterBtns(S.supFilter,"setFilter") : "";
-
-  if(!S.selMat) {
-    html += `<div class="card empty">차트 탭에서 자재를 먼저 선택해주세요</div>`;
-  } else {
-    const rows = [...filteredData().filter(d=>d.material===S.selMat)].sort((a,b)=>b.date.localeCompare(a.date));
-    html += `<div class="card">
-      <div class="lbl">📋 발주 내역 (${rows.length}건)
-        <div style="font-weight:400;font-size:10px;margin-top:2px;color:#4a6280;word-break:break-all">${S.selMat}</div>
-      </div>
-      <div style="overflow-x:auto">
-        <table><thead><tr><th>납품일</th><th>납품처</th><th style="text-align:right">수량</th></tr></thead>
-        <tbody>${rows.map(r=>`<tr>
-          <td>${r.date}</td>
-          <td style="color:${S.sups[r.si]?.color}">${r.supplier}</td>
-          <td style="text-align:right;font-weight:700">${r.qty.toLocaleString()}</td>
-        </tr>`).join("")}</tbody></table>
-      </div>
-    </div>`;
+function renderTable(){
+  if(A.tab!=='table')return;
+  const el=document.getElementById('tableContent');
+  const tot=A.sups.reduce((s,x)=>s+x.rows.length,0);
+  let html=tot>0?fRow(A.sf,'sf'):'';
+  if(!A.mat){html+=`<div class="card empty">차트 탭에서 자재를 먼저 선택해주세요</div>`;}
+  else{
+    const rows=[...fRows().filter(d=>d.material===A.mat)].sort((a,b)=>b.date.localeCompare(a.date));
+    html+=`<div class="card">
+      <div class="lbl">📋 발주 내역 (${rows.length}건)<div style="font-weight:400;font-size:10px;margin-top:2px;color:#4a6280;word-break:break-all">${A.mat}</div></div>
+      <div style="overflow-x:auto"><table><thead><tr><th>납품일</th><th>납품처</th><th style="text-align:right">수량</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td>${r.date}</td><td style="color:${A.sups[r.si]?.color}">${r.sup}</td><td style="text-align:right;font-weight:700">${r.qty.toLocaleString()}</td></tr>`).join('')}</tbody>
+      </table></div></div>`;
   }
-  el.innerHTML = html;
+  el.innerHTML=html;
 }
 
-render();
+renderAll();
 </script>
 </body>
 </html>
