@@ -129,38 +129,47 @@ const db = getDatabase(initializeApp({
   databaseURL:"https://program-953e1-default-rtdb.firebaseio.com",
   projectId:"program-953e1",
 }));
-const DB="egg_v4";
+const DB="egg_v5";
 
 const RULES=[
   { name:"CJ프레시웨이",    color:"#f59e0b", kw:["cj","씨제이"],
     detect:c=>c.includes("납품일자")&&c.includes("발주수량")&&c.includes("발주번호"),
-    parse(rows){ return rows.flatMap(r=>{
-      const date=toDate(r["납품일자"]);if(!date)return[];
-      const mat=sv(r["상품명"]);if(!mat)return[];
-      const qty=nv(r["발주수량"]);if(qty<=0)return[];
-      return[{date,material:mat,qty,_key:sk(`CJ_${sv(r["발주번호"])}_${sv(r["항번"])}`)}];
-    });}
+    parse(rows){
+      const ts=Date.now();
+      return rows.flatMap((r,idx)=>{
+        const date=toDate(r["납품일자"]);if(!date)return[];
+        const mat=sv(r["상품명"]);if(!mat)return[];
+        const qty=nv(r["발주수량"]);if(qty<=0)return[];
+        return[{date,material:mat,qty,_key:sk(`CJ_${ts}_${idx}`)}];
+      });
+    }
   },
   { name:"동원(시화+화성)", color:"#10b981", kw:["동원"],
     detect:c=>c.includes("배송일자")&&c.includes("최종주문량")&&c.includes("의뢰번호"),
-    parse(rows){ return rows.flatMap(r=>{
-      const date=toDate(r["배송일자"]);if(!date)return[];
-      const mat=sv(r["상품명"]);if(!mat)return[];
-      let qty=nv(r["최종주문량"]);if(qty===0)qty=nv(r["원주문량"]);
-      if(qty<=0)return[];
-      // ★ 원본 수량 저장 (토탈에서만 *5)
-      return[{date,material:mat,qty,_key:sk(`DW_${sv(r["의뢰번호"])}_${sv(r["순번"])}`)}];
-    });}
+    parse(rows){
+      const ts=Date.now(); // 파일 업로드 시각 - 같은 파일 재업로드도 구분
+      return rows.flatMap((r,idx)=>{
+        const date=toDate(r["배송일자"]);if(!date)return[];
+        const mat=sv(r["상품명"]);if(!mat)return[];
+        let qty=nv(r["최종주문량"]);if(qty===0)qty=nv(r["원주문량"]);
+        if(qty<=0)return[];
+        // 행 인덱스 기반 키 → 중복 의뢰번호도 전부 저장
+        return[{date,material:mat,qty,_key:sk(`DW_${ts}_${idx}`)}];
+      });
+    }
   },
   { name:"푸디스트",        color:"#3b82f6", kw:["푸디스트","foodist"],
     detect:c=>c.includes("자재명")&&c.includes("입고일")&&c.includes("현재수량"),
-    parse(rows){ return rows.flatMap(r=>{
-      const cc=sv(r["취소시간"]);if(cc.length>=2&&cc!=="0")return[];
-      const date=toDate(r["입고일"]);if(!date)return[];
-      const mat=sv(r["자재명"]);if(!mat)return[];
-      const qty=nv(r["현재수량"]);if(qty<=0)return[];
-      return[{date,material:mat,qty,_key:sk(`FD_${sv(r["발주번호"])}`)}];
-    });}
+    parse(rows){
+      const ts=Date.now();
+      return rows.flatMap((r,idx)=>{
+        const cc=sv(r["취소시간"]);if(cc.length>=2&&cc!=="0")return[];
+        const date=toDate(r["입고일"]);if(!date)return[];
+        const mat=sv(r["자재명"]);if(!mat)return[];
+        const qty=nv(r["현재수량"]);if(qty<=0)return[];
+        return[{date,material:mat,qty,_key:sk(`FD_${ts}_${idx}`)}];
+      });
+    }
   },
 ];
 
@@ -239,12 +248,17 @@ function handleFiles(files){
         const{rule,rows:newRows}=res;
         const si=RULES.findIndex(r=>r.name===rule.name);
         const existing=A.sups[si].rows;
-        const existKeys=new Set(existing.map(r=>r._key));
-        const added=newRows.filter(r=>!existKeys.has(r._key));
-        const merged=[...existing,...added];
+        // 중복 판단: 날짜+품목+수량 조합이 이미 있으면 같은 파일로 판단
+        const existSig=new Set(existing.map(r=>`${r.date}|${r.material}|${r.qty}`));
+        const newSig=new Set(newRows.map(r=>`${r.date}|${r.material}|${r.qty}`));
+        // 기존에 같은 날짜의 같은 납품처 데이터가 있으면 덮어쓰기 (재업로드)
+        const newDates=new Set(newRows.map(r=>r.date));
+        const keepExisting=existing.filter(r=>!newDates.has(r.date));
+        const merged=[...keepExisting,...newRows];
+        const added=newRows;
         A.msgs[si]='💾 저장중...';renderHeader();renderUpload();
         await saveFB(si,merged);
-        A.msgs[si]=`✅ ${rule.name} — ${added.length}건 추가 / 중복 ${newRows.length-added.length}건 / 누적 ${merged.length}건\n☁️ 클라우드 저장 완료`;
+        A.msgs[si]=`✅ ${rule.name} — ${newRows.length}건 반영 / 누적 ${merged.length}건\n☁️ 클라우드 저장 완료`;
         setErr('');renderHeader();renderUpload();
       }catch(err){setErr(`❌ ${file.name}: ${err.message}`);}
     };
