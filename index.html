@@ -555,7 +555,28 @@ function renderTotal(){
       const gc=GCOLOR[g],grp=grps[g];
       html+=`<div class="tghdr" style="color:${gc}">▸ ${g} — 합계 <b style="color:${gc}">${grp.total.toLocaleString()}</b>개</div>`;
       grp.items.sort((a,b)=>b.q-a.q).forEach(({m,q})=>{
-        html+=`<div class="trow"><span class="tmat"><span style="color:${gc};font-size:9px;margin-right:5px">●</span>${m}</span><span class="tqty" style="color:${gc}">${q.toLocaleString()}</span></div>`;
+        // 이 품목의 날짜별 내역
+        const matDateMap={};
+        rows.forEach(r=>{
+          if(r.material!==m)return;
+          const rq=(rule.name==='동원(시화+화성)'&&m.startsWith('★'))?r.qty*5:r.qty;
+          if(!matDateMap[r.date])matDateMap[r.date]=0;
+          matDateMap[r.date]+=rq;
+        });
+        const dateEntries=Object.entries(matDateMap).sort((a,b)=>b[0].localeCompare(a[0]));
+        const today=new Date().toISOString().slice(0,10);
+
+        html+=`<div class="trow" style="flex-direction:column;align-items:stretch;padding:10px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${dateEntries.length?8:0}px">
+            <span class="tmat"><span style="color:${gc};font-size:9px;margin-right:5px">●</span>${m}</span>
+            <span class="tqty" style="color:${gc}">${q.toLocaleString()}</span>
+          </div>
+          ${dateEntries.map(([date,dq])=>`
+            <div style="display:flex;justify-content:space-between;padding:3px 0 3px 14px;border-bottom:1px solid #1a2f5033">
+              <span style="font-size:10px;color:${date===today?gc:'#4a6280'};font-weight:${date===today?700:400}">${date}${date===today?' 🔴':''}</span>
+              <span style="font-size:11px;font-weight:700;color:${date===today?gc:'#64748b'}">${dq.toLocaleString()}</span>
+            </div>`).join('')}
+        </div>`;
       });
     });
     html+=`<div class="grand"><span style="font-size:13px;font-weight:700">총 발주량</span><span style="font-size:18px;font-weight:800;color:#fbbf24">${grand.toLocaleString()} 개</span></div></div>`;
@@ -641,9 +662,23 @@ function renderTable(){
           }).join('')}
         </div>`;
       }).join('')}
-      <div style="display:flex;justify-content:space-between;padding:10px 12px;background:#162444;border-radius:10px;margin-top:4px;border:1px solid #1a2f50">
-        <span style="font-size:13px;font-weight:700">전체 합계</span>
-        <span style="font-size:16px;font-weight:800;color:#fbbf24">${allGrand.toLocaleString()} 개</span>
+      <div style="background:#162444;border-radius:10px;margin-top:8px;border:1px solid #fbbf2444;overflow:hidden">
+        <div style="padding:12px 14px;border-bottom:1px solid #1a2f50">
+          <div style="font-size:11px;color:#4a6280;margin-bottom:4px">📊 전체 누적 발주 합계</div>
+          <div style="font-size:28px;font-weight:800;color:#fbbf24">${allGrand.toLocaleString()} <span style="font-size:14px;font-weight:400;color:#4a6280">개</span></div>
+        </div>
+        <div style="padding:10px 14px">
+          <div style="font-size:11px;color:#4a6280;margin-bottom:8px">자재명별 누적 합계</div>
+          ${Object.entries(allMatTot).sort((a,b)=>b[1]-a[1]).map(([m,q])=>{
+            const row2=allPRows.find(r=>r.material===m);
+            const sup2=row2?row2.sup:'';
+            const gc=GCOLOR[gradeOf(m,sup2)]||'#94a3b8';
+            return`<div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid #1a2f5033">
+              <span style="font-size:11px;color:#cbd5e1;flex:1;word-break:break-all;padding-right:8px">${m}</span>
+              <span style="font-size:13px;font-weight:800;color:${gc};flex-shrink:0">${q.toLocaleString()}</span>
+            </div>`;
+          }).join('')}
+        </div>
       </div>
     </div>`;
   }
