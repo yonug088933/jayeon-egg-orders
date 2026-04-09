@@ -145,7 +145,7 @@ const RULES = [
         if(qty === 0) qty = num(r["원주문량"]);
         if(qty <= 0) continue;
         // ★ 붙은 품목은 원본 수량 그대로 저장 (토탈 탭에서 *5 처리)
-        const uid = `DW_${str(r["의뢰번호"])}`;
+        const uid = `DW_${str(r["의뢰번호"])}_${str(r["순번"])}`;
         res.push({date, material:mat, qty, _key:safeKey(uid)});
       }
       return res;
@@ -309,15 +309,14 @@ document.body.addEventListener("click", e => {
   if(action==="setTotalFilter") { S.totalFilter=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
   if(action==="setTotalPeriod") { S.totalPeriod=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
   if(action==="selectMat") {
-    S.selMat=val;
-    // 전체 render 대신 차트/내역만 갱신 → 스크롤 위치 유지
-    renderChart();
-    renderTable();
-    // mat-list 내 선택 표시 업데이트
-    document.querySelectorAll(".mat-item").forEach(el=>{
-      el.classList.toggle("sel", el.dataset.val===val);
+    S.selMat = val;
+    // mat-item 선택 표시만 업데이트 (스크롤 변화 없음)
+    document.querySelectorAll(".mat-item").forEach(el => {
+      el.classList.toggle("sel", el.dataset.val === val);
     });
-    requestAnimationFrame(()=>window.scrollTo(0,scrollY));
+    // 통계+차트 영역만 부분 업데이트
+    updateStats();
+    requestAnimationFrame(()=>window.scrollTo(0, scrollY));
   }
 });
 
@@ -474,6 +473,45 @@ function render() {
   if(S.tab==="chart") renderChart();
   if(S.tab==="total") renderTotal();
   if(S.tab==="table") renderTable();
+}
+
+// ── 통계+차트 영역만 업데이트 (스크롤 유지용) ───────────────────
+function updateStats() {
+  const {supFilter, view, selMat} = S;
+  if(!selMat) return;
+
+  // stat-grid, 납품처별 바, 차트 카드 영역 업데이트
+  const fd = filteredData();
+  const matRows = fd.filter(d => d.material === selMat);
+  const totalQ = matRows.reduce((s,d) => s+d.qty, 0);
+  const today = new Date().toISOString().slice(0,10);
+  const weekQ = matRows.filter(d=>wk(d.date)===wk(today)).reduce((s,d)=>s+d.qty,0);
+  const monQ  = matRows.filter(d=>mo(d.date)===mo(today)).reduce((s,d)=>s+d.qty,0);
+
+  // stat-grid 업데이트
+  const sg = document.querySelector(".stat-grid");
+  if(sg) {
+    const vals = sg.querySelectorAll(".stat-val");
+    if(vals[0]) vals[0].textContent = totalQ.toLocaleString();
+    if(vals[1]) vals[1].textContent = monQ.toLocaleString();
+    if(vals[2]) vals[2].textContent = weekQ.toLocaleString();
+  }
+
+  // stat-grid 없으면 (첫 선택) 전체 차트 다시 그리기
+  if(!sg) {
+    renderChart();
+    return;
+  }
+
+  // 납품처별 바 업데이트
+  document.querySelectorAll(".bar-fill").forEach((el,i) => {
+    const q = matRows.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
+    el.style.width = totalQ>0 ? (q/totalQ*100)+"%" : "0%";
+  });
+  document.querySelectorAll(".bar-val").forEach((el,i) => {
+    const q = matRows.filter(d=>d.si===i).reduce((a,d)=>a+d.qty,0);
+    el.textContent = q.toLocaleString();
+  });
 }
 
 // ── 차트 탭 ──────────────────────────────────────────────────────
