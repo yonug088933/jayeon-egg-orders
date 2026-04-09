@@ -572,9 +572,12 @@ function renderTotal(){
             <span class="tqty" style="color:${gc}">${q.toLocaleString()}</span>
           </div>
           ${dateEntries.map(([date,dq])=>`
-            <div style="display:flex;justify-content:space-between;padding:3px 0 3px 14px;border-bottom:1px solid #1a2f5033">
-              <span style="font-size:10px;color:${date===today?gc:'#4a6280'};font-weight:${date===today?700:400}">${date}${date===today?' 🔴':''}</span>
-              <span style="font-size:11px;font-weight:700;color:${date===today?gc:'#64748b'}">${dq.toLocaleString()}</span>
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:5px 0 5px 14px;border-bottom:1px solid #1a2f5033">
+              <div style="display:flex;align-items:center;gap:5px">
+                <span style="font-size:11px;font-weight:${date===today?800:400};color:${date===today?gc:'#94a3b8'}">${date}</span>
+                ${date===today?`<span style="font-size:9px;background:${gc};color:#07101f;padding:1px 5px;border-radius:8px;font-weight:700">오늘</span>`:''}
+              </div>
+              <span style="font-size:12px;font-weight:700;color:${date===today?gc:'#64748b'}">${dq.toLocaleString()} 개</span>
             </div>`).join('')}
         </div>`;
       });
@@ -688,18 +691,18 @@ function renderTable(){
     const rows=pRows(sup.rows, A.tp);
     if(!rows.length) return;
 
-    // 날짜별로 그룹
+    // 날짜별로 그룹 (구운란 제외)
     const byDate={};
-    rows.forEach(r=>{
+    rows.filter(r=>isEgg(r.material)).forEach(r=>{
       if(!byDate[r.date]) byDate[r.date]={date:r.date, mats:{}};
       if(!byDate[r.date].mats[r.material]) byDate[r.date].mats[r.material]=0;
       byDate[r.date].mats[r.material]+=r.qty;
     });
     const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
 
-    // 품목별 총합
+    // 품목별 총합 (구운란 제외)
     const matTot={};
-    rows.forEach(r=>{
+    rows.filter(r=>isEgg(r.material)).forEach(r=>{
       if(!matTot[r.material])matTot[r.material]=0;
       matTot[r.material]+=r.qty;
     });
@@ -711,7 +714,10 @@ function renderTable(){
           <div style="width:11px;height:11px;border-radius:50%;background:${sup.color};box-shadow:0 0 6px ${sup.color}88"></div>
           <span style="font-size:14px;font-weight:800;color:${sup.color}">${sup.name}</span>
         </div>
-        <span style="font-size:11px;color:#4a6280">${rows.length}건</span>
+        <div style="text-align:right">
+          <div style="font-size:16px;font-weight:800;color:${sup.color}">${grandTot.toLocaleString()}</div>
+          <div style="font-size:10px;color:#4a6280">${rows.length}건</div>
+        </div>
       </div>
 
       <!-- 품목별 합계 -->
@@ -746,9 +752,12 @@ function renderTable(){
             const dayTot=Object.values(dayData.mats).reduce((a,b)=>a+b,0);
             const isToday=date===today;
             return`<div style="margin-bottom:10px;padding:10px;background:#07101f;border-radius:8px;border-left:3px solid ${sup.color}${isToday?'':'66'}">
-              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-                <span style="font-size:12px;font-weight:700;color:${isToday?sup.color:'#94a3b8'}">${date}${isToday?' 🔴':''}</span>
-                <span style="font-size:12px;font-weight:700;color:${sup.color}">${dayTot.toLocaleString()}</span>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="font-size:13px;font-weight:800;color:${isToday?sup.color:'#e2e8f0'}">${date}</span>
+                  ${isToday?`<span style="font-size:10px;background:${sup.color};color:#07101f;padding:1px 6px;border-radius:10px;font-weight:700">오늘</span>`:''}
+                </div>
+                <span style="font-size:13px;font-weight:800;color:${sup.color}">${dayTot.toLocaleString()} 개</span>
               </div>
               ${Object.entries(dayData.mats).sort((a,b)=>b[1]-a[1]).map(([m,q])=>
                 `<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:2px">
