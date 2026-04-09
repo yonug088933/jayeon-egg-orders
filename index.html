@@ -144,8 +144,7 @@ const RULES = [
         let qty = num(r["최종주문량"]);
         if(qty === 0) qty = num(r["원주문량"]);
         if(qty <= 0) continue;
-        // ★ 붙은 품목은 판 단위 → 개 (*5)
-        if(mat.startsWith("★")) qty = qty * 5;
+        // ★ 붙은 품목은 원본 수량 그대로 저장 (토탈 탭에서 *5 처리)
         const uid = `DW_${str(r["의뢰번호"])}`;
         res.push({date, material:mat, qty, _key:safeKey(uid)});
       }
@@ -309,7 +308,17 @@ document.body.addEventListener("click", e => {
   if(action==="setView") { S.view=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
   if(action==="setTotalFilter") { S.totalFilter=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
   if(action==="setTotalPeriod") { S.totalPeriod=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
-  if(action==="selectMat") { S.selMat=val; render(); requestAnimationFrame(()=>window.scrollTo(0,scrollY)); }
+  if(action==="selectMat") {
+    S.selMat=val;
+    // 전체 render 대신 차트/내역만 갱신 → 스크롤 위치 유지
+    renderChart();
+    renderTable();
+    // mat-list 내 선택 표시 업데이트
+    document.querySelectorAll(".mat-item").forEach(el=>{
+      el.classList.toggle("sel", el.dataset.val===val);
+    });
+    requestAnimationFrame(()=>window.scrollTo(0,scrollY));
+  }
 });
 
 // 검색창
@@ -317,7 +326,29 @@ document.body.addEventListener("input", e => {
   if(e.target.dataset.action==="search") {
     const scrollY = window.scrollY;
     S.search = e.target.value;
-    renderChart();
+    // 자재 목록만 업데이트 (스크롤 유지)
+    const fd = filteredData();
+    const mats = [...new Set(fd.map(d=>d.material))].filter(Boolean).sort();
+    const filt = mats.filter(m=>m.toLowerCase().includes(S.search.toLowerCase()));
+    const supFilter = S.supFilter;
+    const selMat = S.selMat;
+    const listEl = document.querySelector(".mat-list");
+    if(listEl) {
+      let inner = "";
+      if(!filt.length) {
+        inner = `<div style="padding:12px;color:#4a6280;font-size:12px">검색 결과 없음</div>`;
+      } else if(supFilter==="푸디스트") {
+        const grps={};
+        filt.forEach(m=>{const g=grade(m,"푸디스트");if(!grps[g])grps[g]=[];grps[g].push(m);});
+        GRADE_ORDER.filter(g=>grps[g]).forEach(g=>{
+          inner+=`<div class="grade-hdr" style="color:${GRADE_COLOR[g]}">▸ ${g} (${grps[g].length}종)</div>`;
+          grps[g].forEach(m=>{inner+=`<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}"><span style="color:${GRADE_COLOR[g]};margin-right:5px;font-size:10px">●</span>${m}</div>`;});
+        });
+      } else {
+        filt.forEach(m=>{inner+=`<div class="mat-item${m===selMat?" sel":""}" data-action="selectMat" data-val="${m.replace(/"/g,"&quot;")}">${m}</div>`;});
+      }
+      listEl.innerHTML = inner;
+    }
     requestAnimationFrame(()=>window.scrollTo(0,scrollY));
   }
 });
@@ -592,7 +623,9 @@ function renderTotal() {
       const m = r.material;
       if(!isEgg(m)) return;
       if(!matTotals[m]) matTotals[m] = 0;
-      matTotals[m] += r.qty; // ★×5는 이미 파싱 시 적용됨
+      // 동원 ★ 품목: 토탈에서만 *5 (판→개)
+      const qty = (rule.name==="동원(시화+화성)" && m.startsWith("★")) ? r.qty*5 : r.qty;
+      matTotals[m] += qty;
     });
     const grandTotal = Object.values(matTotals).reduce((a,b)=>a+b, 0);
     if(grandTotal===0) return;
@@ -635,7 +668,11 @@ function renderTotal() {
     const allRows = applyPeriod(allData(), totalPeriod).filter(r=>isEgg(r.material));
     const grandAll = allRows.reduce((s,d)=>s+d.qty, 0);
     const gradeAll = {};
-    allRows.forEach(r => { const g=grade(r.material,r.supplier); gradeAll[g]=(gradeAll[g]||0)+r.qty; });
+    allRows.forEach(r => {
+      const qty = (r.supplier==="동원(시화+화성)" && r.material.startsWith("★")) ? r.qty*5 : r.qty;
+      const g = grade(r.material,r.supplier);
+      gradeAll[g] = (gradeAll[g]||0) + qty;
+    });
 
     html += `<div class="card" style="border-color:#fbbf2444">
       <div style="font-size:14px;font-weight:800;color:#fbbf24;margin-bottom:12px">📊 전체 통합 발주량</div>
