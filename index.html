@@ -81,7 +81,7 @@ td{padding:7px 6px;border-bottom:1px solid #1a2f5033;color:#cbd5e1}
     <button class="tab on" data-tab="upload">📁 데이터</button>
     <button class="tab" data-tab="chart">📊 차트</button>
     <button class="tab" data-tab="total">📦 토탈</button>
-    <button class="tab" data-tab="table">📋 내역</button>
+    <button class="tab" data-tab="table">📋 발주내역</button>
   </div>
 
   <div id="tab-upload" class="sec">
@@ -585,16 +585,149 @@ function renderTable(){
   if(A.tab!=='table')return;
   const el=document.getElementById('tableContent');
   const tot=A.sups.reduce((s,x)=>s+x.rows.length,0);
-  let html=tot>0?fRow(A.sf,'sf'):'';
-  if(!A.mat){html+=`<div class="card empty">차트 탭에서 자재를 먼저 선택해주세요</div>`;}
-  else{
-    const rows=[...fRows().filter(d=>d.material===A.mat)].sort((a,b)=>b.date.localeCompare(a.date));
-    html+=`<div class="card">
-      <div class="lbl">📋 발주 내역 (${rows.length}건)<div style="font-weight:400;font-size:10px;margin-top:2px;color:#4a6280;word-break:break-all">${A.mat}</div></div>
-      <div style="overflow-x:auto"><table><thead><tr><th>납품일</th><th>납품처</th><th style="text-align:right">수량</th></tr></thead>
-      <tbody>${rows.map(r=>`<tr><td>${r.date}</td><td style="color:${A.sups[r.si]?.color}">${r.sup}</td><td style="text-align:right;font-weight:700">${r.qty.toLocaleString()}</td></tr>`).join('')}</tbody>
-      </table></div></div>`;
+  if(A.db==='connecting'){el.innerHTML=`<div class="empty">☁️ 불러오는 중...</div>`;return;}
+  if(!tot){el.innerHTML=`<div class="card empty">📁 데이터 탭에서 파일을 업로드해주세요</div>`;return;}
+
+  // 기간 필터
+  let html=`<div class="frow">${['전체','이번주','이번달'].map(p=>{
+    const on=A.tp===p;
+    return`<button class="fbtn" data-act="tp" data-val="${p}" style="background:${on?'#fbbf24':'#0d1b2e'};color:${on?'#07101f':'#4a6280'};border-color:${on?'#fbbf24':'#1a2f50'}">${p}</button>`;
+  }).join('')}</div>`;
+
+  const today=new Date().toISOString().slice(0,10);
+
+  // ── 전체 자재명 통합 집계 (구운란 제외) ───────────────────────
+  const allPRows = pRows(allRows(), A.tp).filter(r=>isEgg(r.material));
+  if(allPRows.length){
+    const allMatTot={};
+    allPRows.forEach(r=>{
+      if(!allMatTot[r.material])allMatTot[r.material]=0;
+      allMatTot[r.material]+=r.qty;
+    });
+    const allGrand=Object.values(allMatTot).reduce((a,b)=>a+b,0);
+
+    // 등급별로 묶기
+    const grpAll={};
+    Object.entries(allMatTot).forEach(([m,q])=>{
+      // 납품처 찾기
+      const row=allPRows.find(r=>r.material===m);
+      const sup=row?row.sup:'';
+      const g=gradeOf(m,sup);
+      if(!grpAll[g])grpAll[g]={items:[],total:0};
+      grpAll[g].items.push({m,q});
+      grpAll[g].total+=q;
+    });
+
+    html+=`<div class="card" style="border-color:#fbbf2444;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span style="font-size:14px;font-weight:800;color:#fbbf24">📊 전체 자재명 발주량</span>
+        <span style="font-size:11px;color:#4a6280">구운란 제외</span>
+      </div>
+      ${GORDER.filter(g=>grpAll[g]).map(g=>{
+        const gc=GCOLOR[g], grp=grpAll[g];
+        return`<div style="margin-bottom:14px">
+          <div style="font-size:11px;font-weight:700;color:${gc};margin-bottom:6px;letter-spacing:1px">▸ ${g} — ${grp.total.toLocaleString()}개</div>
+          ${grp.items.sort((a,b)=>b.q-a.q).map(({m,q})=>{
+            const pct=allGrand>0?(q/allGrand*100):0;
+            return`<div style="margin-bottom:7px">
+              <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+                <span style="font-size:11px;color:#cbd5e1;flex:1;word-break:break-all;padding-right:8px">${m}</span>
+                <span style="font-size:12px;font-weight:700;color:${gc};flex-shrink:0">${q.toLocaleString()}</span>
+              </div>
+              <div style="height:5px;background:#07101f;border-radius:3px">
+                <div style="height:5px;border-radius:3px;background:${gc};width:${pct}%"></div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>`;
+      }).join('')}
+      <div style="display:flex;justify-content:space-between;padding:10px 12px;background:#162444;border-radius:10px;margin-top:4px;border:1px solid #1a2f50">
+        <span style="font-size:13px;font-weight:700">전체 합계</span>
+        <span style="font-size:16px;font-weight:800;color:#fbbf24">${allGrand.toLocaleString()} 개</span>
+      </div>
+    </div>`;
   }
+
+  // ── 납품처별 카드
+  A.sups.forEach((sup,si)=>{
+    const rows=pRows(sup.rows, A.tp);
+    if(!rows.length) return;
+
+    // 날짜별로 그룹
+    const byDate={};
+    rows.forEach(r=>{
+      if(!byDate[r.date]) byDate[r.date]={date:r.date, mats:{}};
+      if(!byDate[r.date].mats[r.material]) byDate[r.date].mats[r.material]=0;
+      byDate[r.date].mats[r.material]+=r.qty;
+    });
+    const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+
+    // 품목별 총합
+    const matTot={};
+    rows.forEach(r=>{
+      if(!matTot[r.material])matTot[r.material]=0;
+      matTot[r.material]+=r.qty;
+    });
+    const grandTot=Object.values(matTot).reduce((a,b)=>a+b,0);
+
+    html+=`<div class="card" style="border-color:${sup.color}44">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div style="width:11px;height:11px;border-radius:50%;background:${sup.color};box-shadow:0 0 6px ${sup.color}88"></div>
+          <span style="font-size:14px;font-weight:800;color:${sup.color}">${sup.name}</span>
+        </div>
+        <span style="font-size:11px;color:#4a6280">${rows.length}건</span>
+      </div>
+
+      <!-- 품목별 합계 -->
+      <div style="margin-bottom:14px">
+        <div class="lbl">📦 품목별 발주량</div>
+        ${Object.entries(matTot).sort((a,b)=>b[1]-a[1]).map(([m,q])=>{
+          const pct=grandTot>0?(q/grandTot*100):0;
+          return`<div style="margin-bottom:8px">
+            <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+              <span style="font-size:11px;color:#cbd5e1;flex:1;word-break:break-all;padding-right:8px">${m}</span>
+              <span style="font-size:12px;font-weight:700;color:${sup.color};flex-shrink:0">${q.toLocaleString()}</span>
+            </div>
+            <div style="height:5px;background:#07101f;border-radius:3px">
+              <div style="height:5px;border-radius:3px;background:${sup.color};width:${pct}%"></div>
+            </div>
+          </div>`;
+        }).join('')}
+        <div style="display:flex;justify-content:space-between;padding:8px 10px;background:#07101f;border-radius:8px;margin-top:8px">
+          <span style="font-size:12px;font-weight:700">합계</span>
+          <span style="font-size:14px;font-weight:800;color:${sup.color}">${grandTot.toLocaleString()}</span>
+        </div>
+      </div>
+
+      <!-- 날짜별 상세 내역 (접기/펼치기) -->
+      <details>
+        <summary style="font-size:12px;font-weight:700;color:#4a6280;cursor:pointer;padding:6px 0;list-style:none">
+          ▸ 날짜별 상세 내역 보기 (${dates.length}일)
+        </summary>
+        <div style="margin-top:10px">
+          ${dates.map(date=>{
+            const dayData=byDate[date];
+            const dayTot=Object.values(dayData.mats).reduce((a,b)=>a+b,0);
+            const isToday=date===today;
+            return`<div style="margin-bottom:10px;padding:10px;background:#07101f;border-radius:8px;border-left:3px solid ${sup.color}${isToday?'':'66'}">
+              <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:12px;font-weight:700;color:${isToday?sup.color:'#94a3b8'}">${date}${isToday?' 🔴':''}</span>
+                <span style="font-size:12px;font-weight:700;color:${sup.color}">${dayTot.toLocaleString()}</span>
+              </div>
+              ${Object.entries(dayData.mats).sort((a,b)=>b[1]-a[1]).map(([m,q])=>
+                `<div style="display:flex;justify-content:space-between;font-size:11px;color:#64748b;margin-bottom:2px">
+                  <span style="flex:1;word-break:break-all;padding-right:8px">${m}</span>
+                  <span style="flex-shrink:0">${q.toLocaleString()}</span>
+                </div>`
+              ).join('')}
+            </div>`;
+          }).join('')}
+        </div>
+      </details>
+    </div>`;
+  });
+
   el.innerHTML=html;
 }
 
